@@ -19,6 +19,11 @@ public class Clickable : MonoBehaviour
     // Does the clickable icon continue to exist after click, spawning a duplicate to follow the mouse?
     public bool respawn;
 
+    // The BoxCollider2D component attached to this objecet
+    public BoxCollider2D boxCol;
+    // The center size corresponding to the box collider 2d on this object
+    public Vector2 size;
+
     // Is the game object currently tracking with the player's cursor?
     private bool tracking = false;
 
@@ -26,6 +31,7 @@ public class Clickable : MonoBehaviour
     {
         if (sprite == null || physicsObject == null)
             Debug.LogError("Clickable objects not fully setup in editor.");
+        boxCol = GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -61,8 +67,27 @@ public class Clickable : MonoBehaviour
         }
         else
         {
+            // Check the collision of trying to place the object here
+            /*
+            Vector2 origin = new Vector2(transform.position.x, transform.position.y);
+            Collider2D col = Physics2D.OverlapBox(origin, size, 0.0f, LayerMask.GetMask(new string[] { "Default", "UI" }));
+            Debug.Log("Origin: " + origin.x + ", " + origin.y + ", size: " + size.x + ", " + size.y + ".");
+            if (col != null)
+            {
+                Debug.LogError("Collider " + col.gameObject.name + " is in this area.");
+                return;
+            }
+            */
+
+            // Are we within the bed bounds area?
+            if (!boxCol.bounds.Intersects(GameManager.S.bedBounds.bounds))
+                return;
+
             // Create a physics object at this place
             Instantiate(physicsObject, transform.position, physicsObject.transform.rotation);
+
+            // Update the GameManager, that a new physics object is in the scene.
+            GameManager.S.SpawnBedding();
 
             // Self destruct this image object
             Destroy(gameObject);

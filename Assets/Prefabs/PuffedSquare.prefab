@@ -609,9 +609,9 @@ MonoBehaviour:
   - {fileID: 503453470261540679}
   - {fileID: 503453472088631317}
   dampValues:
-  - 0.9
+  - 1
   stiffValues:
-  - 20
+  - 15
 --- !u!1 &503453470670903242
 GameObject:
   m_ObjectHideFlags: 0
