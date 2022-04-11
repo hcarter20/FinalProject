@@ -620,6 +620,7 @@ GameObject:
   - component: {fileID: 3375333216300265307}
   - component: {fileID: 3375333216300265308}
   - component: {fileID: 3375333216300265309}
+  - component: {fileID: 1308868854974827160}
   m_Layer: 0
   m_Name: RoundedRectangle
   m_TagString: Untagged
@@ -760,6 +761,19 @@ MonoBehaviour:
   stiffValues:
   - 20
   - 10
+--- !u!114 &1308868854974827160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3375333216300265304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead8ab28fb605784eb15bbf1912fabb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHazard: 0
 --- !u!1 &3375333216364761592
 GameObject:
   m_ObjectHideFlags: 0

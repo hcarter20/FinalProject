@@ -468,6 +468,7 @@ GameObject:
   - component: {fileID: 503453470583061631}
   - component: {fileID: 503453470583061626}
   - component: {fileID: 503453470583061629}
+  - component: {fileID: 3220830797005336047}
   m_Layer: 0
   m_Name: PuffedSquare
   m_TagString: Untagged
@@ -612,6 +613,19 @@ MonoBehaviour:
   - 1
   stiffValues:
   - 15
+--- !u!114 &3220830797005336047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503453470583061630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead8ab28fb605784eb15bbf1912fabb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHazard: 0
 --- !u!1 &503453470670903242
 GameObject:
   m_ObjectHideFlags: 0

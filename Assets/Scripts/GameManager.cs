@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum GameState { setup, sleeping, gameOver };
+public enum GameState { setup, sleeping, gameOverLose, gameOverWin };
 
 public class GameManager : MonoBehaviour
 {
@@ -11,21 +11,29 @@ public class GameManager : MonoBehaviour
     public static GameManager S;
     public GameState gameState = GameState.setup;
 
-    // Text UI Element that marks timer for sleep section
-    public Text timerText;
     // The amount of time the player gets for sleep section
     public float sleepTime = 5.0f;
     // The princess character controller
     public PrincessController princess;
+
     // The collider which defines the bed bounds
     public BoxCollider2D bedBounds;
+    // The collider which defines the linen closet bounds
+    public BoxCollider2D closetBounds;
 
-    // Used to track time left and bedding left during gameplay
-    private int beddingLeft;
-    public float timeLeft;
+    // Temp: Total amount of bedding items you can place
+    public int beddingLeft = 12;
 
-    // Coroutine which updates the timer
-    private Coroutine timerCoroutine;
+    // Used to track time left during gameplay
+    private float timeLeft;
+
+    // Text UI Element that marks timer for sleep section
+    public Text timerText;
+    // Text UI Element that gives the princess's requirements
+    public Text infoText;
+
+    // Boolean used to track the timer
+    private bool isCountdown = false;
 
     private void Awake()
     {
@@ -35,34 +43,58 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // Initialize gameplay variables
-        Clickable[] allClickable = FindObjectsOfType<Clickable>();
-        beddingLeft = allClickable.Length;
+        timerText.text = "";
     }
 
-    public void SpawnBedding()
+    private void Update()
+    {
+        // Temp: Hit the escape key to exit the game
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+
+        // Update the timer when princess is sleeping
+        if (gameState == GameState.sleeping)
+        {
+            if (isCountdown)
+            {
+                timeLeft -= Time.deltaTime;
+                DisplayTimer();
+            }
+            else
+            {
+                timeLeft = 0.0f;
+                isCountdown = false;
+                gameState = GameState.gameOverWin;
+                DisplayTimer();
+            }
+        }
+    }
+
+    public void SpawnBedding(Bedding bedding)
     {
         beddingLeft--;
 
-        if (beddingLeft == 0)
+        if (beddingLeft <= 0)
         {
             princess.Activate();
             gameState = GameState.sleeping;
-            timerCoroutine = StartCoroutine(SleepCountdown());
+            timeLeft = sleepTime;
+            isCountdown = true;
         }
     }
 
-    private IEnumerator SleepCountdown()
+    public void FailLevel()
     {
-        timeLeft = sleepTime;
+        // Freeze the countdown timer, instantly fail level
+        gameState = GameState.gameOverLose;
+        Debug.Log("You lose the round.");
+    }
 
-        while (timeLeft > 0.0f)
-        {
-            yield return new WaitForSeconds(1.0f);
-            timeLeft -= 1.0f;
-            timerText.text = "Time Left: 0:0" + Mathf.FloorToInt(timeLeft).ToString("0");
-        }
-
-        gameState = GameState.gameOver;
-        timerText.text = "You Win!";
+    private void DisplayTimer()
+    {
+        // So the last second displays as 0:01, instead of 0:00.
+        float timeDisplay = timeLeft + 1;
+        float seconds = Mathf.FloorToInt(timeDisplay % 60);
+        timerText.text = "Time Left: 0:" + seconds.ToString("00");
     }
 }

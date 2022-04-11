@@ -316,6 +316,7 @@ GameObject:
   - component: {fileID: 3494643405892677057}
   - component: {fileID: 3494643405892677071}
   - component: {fileID: 3494643405892677068}
+  - component: {fileID: 1249252956404098964}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -444,6 +445,19 @@ MonoBehaviour:
   stiffValues:
   - 20
   - 15
+--- !u!114 &1249252956404098964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3494643405892677056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead8ab28fb605784eb15bbf1912fabb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHazard: 1
 --- !u!1 &3494643407090537709
 GameObject:
   m_ObjectHideFlags: 0

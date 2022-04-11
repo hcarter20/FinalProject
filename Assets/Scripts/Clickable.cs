@@ -21,8 +21,6 @@ public class Clickable : MonoBehaviour
 
     // The BoxCollider2D component attached to this objecet
     public BoxCollider2D boxCol;
-    // The center size corresponding to the box collider 2d on this object
-    public Vector2 size;
 
     // Is the game object currently tracking with the player's cursor?
     private bool tracking = false;
@@ -49,16 +47,20 @@ public class Clickable : MonoBehaviour
      * On first click, begin tracking with the cursor. On second click, place physics object at current location. */
     private void OnMouseUpAsButton()
     {
+        // Temp: check if this object is receiving the mouse click raycast
+        // Debug.Log("OnMouseUp on object " + gameObject.name);
+
         if (!tracking)
         {
             // If set to respawn, create a duplicate in the selection area
             if (respawn)
-                Instantiate(gameObject);
+                Instantiate(gameObject, transform.parent);
 
             // Begin updating to follow cursor position
             tracking = true;
 
             // Set the scale of this game object to match the physics object
+            transform.parent = null;
             transform.localScale = physicsObject.transform.localScale;
 
             // Make the sprite partially transparent
@@ -67,27 +69,47 @@ public class Clickable : MonoBehaviour
         }
         else
         {
-            // Check the collision of trying to place the object here
-            /*
-            Vector2 origin = new Vector2(transform.position.x, transform.position.y);
-            Collider2D col = Physics2D.OverlapBox(origin, size, 0.0f, LayerMask.GetMask(new string[] { "Default", "UI" }));
-            Debug.Log("Origin: " + origin.x + ", " + origin.y + ", size: " + size.x + ", " + size.y + ".");
-            if (col != null)
+            // Are we within the linen closet area (i.e. trying to unselect)?
+            if (boxCol.bounds.Intersects(GameManager.S.closetBounds.bounds))
             {
-                Debug.LogError("Collider " + col.gameObject.name + " is in this area.");
+                /*
+                Debug.Log("Unselecting this item: " + boxCol.bounds.ToString()
+                    + " vs " + GameManager.S.bedBounds.bounds.ToString());
+                */
+                Destroy(gameObject);
                 return;
             }
-            */
 
             // Are we within the bed bounds area?
             if (!boxCol.bounds.Intersects(GameManager.S.bedBounds.bounds))
+            {
+                /*
+                Debug.LogError("Not within bounds of the bed: " + boxCol.bounds.ToString()
+                    + " vs " + GameManager.S.bedBounds.bounds.ToString());
+                */
                 return;
+            }
+
+            // Check the collision of trying to place the object here
+            Vector2 origin = new Vector2(transform.position.x, transform.position.y);
+            Vector2 scaledSize = new Vector2(boxCol.size.x * transform.lossyScale.x, boxCol.size.y * transform.lossyScale.y);
+            Collider2D col = Physics2D.OverlapBox(origin, scaledSize, 0.0f, LayerMask.GetMask(new string[] { "Default" }));
+            if (col != null)
+            {
+                /*
+                Debug.LogError("Collider " + col.gameObject.name + " is in this area: " 
+                    + col.bounds.ToString() + " vs our box at " + origin.ToString() + " with size " + boxCol.size.ToString());
+                Debug.LogError("Mouse click is at " + Camera.main.ScreenToWorldPoint(Input.mousePosition).ToString());
+                */
+                return;
+            }
 
             // Create a physics object at this place
-            Instantiate(physicsObject, transform.position, physicsObject.transform.rotation);
+            GameObject bedObject = Instantiate(physicsObject, transform.position, physicsObject.transform.rotation);
+            Bedding bedding = bedObject.GetComponent<Bedding>();
 
             // Update the GameManager, that a new physics object is in the scene.
-            GameManager.S.SpawnBedding();
+            GameManager.S.SpawnBedding(bedding);
 
             // Self destruct this image object
             Destroy(gameObject);
