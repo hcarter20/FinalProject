@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     // The princess character controller
     public PrincessController princess;
+    // The minion spawner
+    public MinionSpawner minionSpawner;
     // The collider which defines the bed bounds
     public BoxCollider2D bedBounds;
     // The collider which defines the linen closet bounds
@@ -30,6 +32,8 @@ public class GameManager : MonoBehaviour
     public Text timerText;
     // Text UI Element that gives the princess's requirements
     public Text infoText;
+    // Button which can end the stacking phase early
+    public Button stackButton;
 
     // Used to track time left during gameplay
     private float timeLeft;
@@ -50,6 +54,8 @@ public class GameManager : MonoBehaviour
         // Start the stacking phase
         gameState = GameState.stacking;
         isCountdown = true;
+        if (minionSpawner != null)
+            minionSpawner.StartSpawning();
     }
 
     private void Update()
@@ -96,6 +102,13 @@ public class GameManager : MonoBehaviour
     private IEnumerator BeginNighttime()
     {
         // TODO: Play sound effect? Some signal of the transition?
+
+        // Stop the minions from spawning anymore
+        if (minionSpawner != null)
+            minionSpawner.StopSpawning();
+        // Remove the button for the end of stacking
+        if (stackButton.gameObject.activeInHierarchy)
+            stackButton.gameObject.SetActive(false);
 
         // Give a moment of transition from day to night
         yield return new WaitForSeconds(transitionTime);
