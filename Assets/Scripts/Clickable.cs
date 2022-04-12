@@ -5,9 +5,10 @@ using UnityEngine;
 /* Handles the behavior for clicking and moving objects in the scene:
  *  Player clicks on an object in the selection area, and it begins to trail their mouse
  *   (without requiring player to continue holding down the button).
+ *  If the player clicks in the selection area again, the object is deleted (stops trailing).
  *  When player clicks again in the placement area, the object is spawned in the world,
  *   i.e. the image version is replaced with the real physics prefab version.
- * TODO: Collision checks on placement (check if legal position to drop).
+ *  On click, checks for collisions and prevents player from placing the object in illegal position.
  */
 
 public class Clickable : MonoBehaviour
@@ -105,11 +106,7 @@ public class Clickable : MonoBehaviour
             }
 
             // Create a physics object at this place
-            GameObject bedObject = Instantiate(physicsObject, transform.position, physicsObject.transform.rotation);
-            Bedding bedding = bedObject.GetComponent<Bedding>();
-
-            // Update the GameManager, that a new physics object is in the scene.
-            GameManager.S.SpawnBedding(bedding);
+            Instantiate(physicsObject, transform.position, physicsObject.transform.rotation);
 
             // Self destruct this image object
             Destroy(gameObject);
