@@ -223,7 +223,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.1, y: 0}
-  m_Size: {x: 0.4, y: 0.6}
+  m_Size: {x: 0.4, y: 0.46}
   m_Direction: 0
 --- !u!114 &1105192969961543291
 MonoBehaviour:
@@ -474,6 +474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHazard: 0
+  itemType: 0
 --- !u!1 &1105192970546040179
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,7 +1154,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.1, y: 0}
-  m_Size: {x: 0.4, y: 0.6}
+  m_Size: {x: 0.4, y: 0.45}
   m_Direction: 0
 --- !u!114 &1105192971137357912
 MonoBehaviour:
@@ -1457,7 +1458,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.1, y: 0}
-  m_Size: {x: 0.4, y: 0.6}
+  m_Size: {x: 0.4, y: 0.46}
   m_Direction: 0
 --- !u!114 &1105192971532552209
 MonoBehaviour:
@@ -1609,7 +1610,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.1, y: 0}
-  m_Size: {x: 0.4, y: 0.6}
+  m_Size: {x: 0.4, y: 0.45}
   m_Direction: 0
 --- !u!114 &1105192971600414302
 MonoBehaviour:
