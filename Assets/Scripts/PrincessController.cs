@@ -62,11 +62,6 @@ public class PrincessController : MonoBehaviour
     {
         if (isSleeping)
         {
-            if (collision.transform.parent != null)
-                Debug.Log("Princess collided with " + collision.transform.parent.gameObject.name);
-            else
-                Debug.Log("Princess collided with " + collision.gameObject.name);
-
             // Check if the item princess collided with is bedding
             Stackable bedding = collision.gameObject.GetComponentInParent<Stackable>();
 
@@ -74,11 +69,21 @@ public class PrincessController : MonoBehaviour
             if (bedding == null)
             {
                 Debug.Log("Princess wakes up because she collided with non-bedding (couldn't find Stackable in parent).");
+                if (collision.transform.parent != null)
+                    Debug.Log("Princess collided with " + collision.transform.parent.gameObject.name);
+                else
+                    Debug.Log("Princess collided with " + collision.gameObject.name);
+
                 WakeUp();
             }
             else if (bedding.isHazard)
             {
                 Debug.Log("Princess wakes up because she collided with a hazard.");
+                if (collision.transform.parent != null)
+                    Debug.Log("Princess collided with " + collision.transform.parent.gameObject.name);
+                else
+                    Debug.Log("Princess collided with " + collision.gameObject.name);
+
                 WakeUp();
             }
         }
