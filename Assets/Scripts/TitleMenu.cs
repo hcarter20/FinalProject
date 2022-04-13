@@ -8,9 +8,6 @@ public class TitleMenu : MonoBehaviour
     public GameObject TitleScreen;
     public GameObject SettingScreen;
 
-    // The name of the scene to load from Play button
-    public string FirstSceneName;
-
     // Should start with title menu open, others closed
     private void Start()
     {
@@ -23,7 +20,7 @@ public class TitleMenu : MonoBehaviour
     /// </summary>
     public void PlayGame()
     {
-        LevelManager.S.LoadScene(FirstSceneName);
+        LevelManager.S.StartFromTitle();
     }
 
     /// <summary>

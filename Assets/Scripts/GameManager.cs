@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     public float stackTime = 30.0f;
     // The amount of time the player gets for sleep section
     public float sleepTime = 5.0f;
-
     // The amount of time to transition between states (in seconds)
     public float transitionTime = 1.0f;
 
@@ -45,7 +44,17 @@ public class GameManager : MonoBehaviour
         S = this;
     }
 
-    private void Start()
+    /* Called by the LevelManager: specifies which level of gameplay to initialize */
+    public void LoadLevel(Level levelInfo)
+    {
+        // Load the princess
+
+        // Load the linen closet
+
+    }
+
+    /* Triggered by the button on the initial intro menu */
+    public void Setup()
     {
         // Initialize gameplay variables
         timerText.text = "";
@@ -136,8 +145,8 @@ public class GameManager : MonoBehaviour
         // Give a moemnt of transition after you win
         yield return new WaitForSeconds(transitionTime);
 
-        // TODO: Reset the level? Move to game over screen?
-
+        // Move to game over screen?
+        LevelManager.S.FailLevel();
     }
 
     private IEnumerator Victory()
@@ -149,16 +158,17 @@ public class GameManager : MonoBehaviour
         // Give a moemnt of transition after you win
         yield return new WaitForSeconds(transitionTime);
 
-        // TODO: Move on to the next level
-
+        // Move on to the level select
+        LevelManager.S.PassLevel();
     }
 
     private void DisplayTimer()
     {
         // So the last second displays as 0:01, instead of 0:00.
         float timeDisplay = timeLeft + 1;
+        float minutes = Mathf.FloorToInt(timeDisplay / 60);
         float seconds = Mathf.FloorToInt(timeDisplay % 60);
         seconds = Mathf.Max(0.0f, seconds);
-        timerText.text = "Time Left: 0:" + seconds.ToString("00");
+        timerText.text = "Time Left: " + minutes.ToString("00") + ":" + seconds.ToString("00");
     }
 }

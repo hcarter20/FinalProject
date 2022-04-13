@@ -238,7 +238,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TitleScreen: {fileID: 0}
   SettingScreen: {fileID: 0}
-  FirstSceneName: 
 --- !u!1 &243794071
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,7 +780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.990566, g: 0.76067996, b: 0.9398188, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1471,3 +1470,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26dc0385ec716fb448fe7fc379ef97ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 1
+  TitleScene: TitleScreen
+  IntroScene: Intro
+  SelectScene: LevelSelect
+  GameScene: Bedroom
+  VictoryScene: Victory
+  LossScene: GameOver
+  LevelCount: 5
