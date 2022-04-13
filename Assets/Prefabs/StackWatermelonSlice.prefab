@@ -1684,3 +1684,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHazard: 1
+  itemType: 5
