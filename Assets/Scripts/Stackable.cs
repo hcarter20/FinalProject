@@ -41,4 +41,16 @@ public class Stackable : MonoBehaviour
         // Once it reaches such a small size, it's destroyed
         Destroy(gameObject);
     }
+
+    // TODO: Setup to detect collisions from the children, use those forces to determine when to break:
+    /*
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (itemType == StackItem.watermelon)
+        {
+            float force = Vector3.Dot(collision.contacts[0].normal, collision.relativeVelocity) * collision.rigidbody.mass;
+            Debug.Log("Collided with " + collision.gameObject.name + " with force " + force);
+        }
+    }
+    */
 }
