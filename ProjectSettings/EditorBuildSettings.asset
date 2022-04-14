@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Development/hcarter_level.unity
     guid: 83487db1933c85943b31186da70e00a2
+  - enabled: 1
+    path: Assets/Scenes/Development/hcarter_new.unity
+    guid: 3eb25a50854355b46a8c57643bfe62b2
   m_configObjects: {}

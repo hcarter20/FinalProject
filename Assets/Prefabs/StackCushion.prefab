@@ -1533,6 +1533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHazard: 0
+  itemType: 1
 --- !u!1 &3340701905746185234
 GameObject:
   m_ObjectHideFlags: 0

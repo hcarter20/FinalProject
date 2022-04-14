@@ -40,7 +40,7 @@ public class PrincessController : MonoBehaviour
         rb.isKinematic = false;
         coll.enabled = true;
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1.0f);
-        initialRotationZ = transform.eulerAngles.z;
+        initialRotationZ = ToDegrees(transform.eulerAngles.z);
         isSleeping = true;
     }
 
@@ -49,8 +49,12 @@ public class PrincessController : MonoBehaviour
         if (isSleeping)
         {
             // Check if the princess has rotated too far from original position
-            if (Mathf.Abs(transform.eulerAngles.z - initialRotationZ) > maxRotateZ)
+            if (Mathf.Abs(ToDegrees(transform.eulerAngles.z) - initialRotationZ) > maxRotateZ)
+            {
+                Debug.Log("Princess wakes up because of rotation: initial rotation " 
+                    + initialRotationZ + " vs. eulerAngles " + transform.eulerAngles.z + ".");
                 WakeUp();
+            }
         }
     }
 
@@ -58,19 +62,30 @@ public class PrincessController : MonoBehaviour
     {
         if (isSleeping)
         {
-            if (collision.transform.parent != null)
-                Debug.Log("Princess collided with " + collision.transform.parent.gameObject.name);
-            else
-                Debug.Log("Princess collided with " + collision.gameObject.name);
-
             // Check if the item princess collided with is bedding
             Stackable bedding = collision.gameObject.GetComponentInParent<Stackable>();
 
             // Colliding with non-bedding (the bed frame) or a hazardous item is failure
             if (bedding == null)
+            {
+                Debug.Log("Princess wakes up because she collided with non-bedding (couldn't find Stackable in parent).");
+                if (collision.transform.parent != null)
+                    Debug.Log("Princess collided with " + collision.transform.parent.gameObject.name);
+                else
+                    Debug.Log("Princess collided with " + collision.gameObject.name);
+
                 WakeUp();
+            }
             else if (bedding.isHazard)
+            {
+                Debug.Log("Princess wakes up because she collided with a hazard.");
+                if (collision.transform.parent != null)
+                    Debug.Log("Princess collided with " + collision.transform.parent.gameObject.name);
+                else
+                    Debug.Log("Princess collided with " + collision.gameObject.name);
+
                 WakeUp();
+            }
         }
     }
 
@@ -78,5 +93,13 @@ public class PrincessController : MonoBehaviour
     {
         isSleeping = false;
         GameManager.S.FailLevel();
+    }
+
+    /* Converts rotations from [0, 360) to (-180, 180]. */
+    private float ToDegrees(float rotation)
+    {
+        if (rotation > 180.0f)
+            return rotation - 360.0f;
+        return rotation;
     }
 }
