@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2900920781183595858}
   - component: {fileID: 2900920781183595854}
   - component: {fileID: 2900920781183595853}
-  - component: {fileID: 2900920781183595852}
   - component: {fileID: 2900920781183595859}
   m_Layer: 5
   m_Name: bookBase
@@ -77,21 +76,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!111 &2900920781183595852
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2900920781183595857}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: f6336c994a62bcd488f630541757d49c, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!95 &2900920781183595859
 Animator:
   serializedVersion: 3
