@@ -11,9 +11,11 @@ public class InGameMenu : MonoBehaviour
     public GameObject PauseScreen;
     public GameObject ControlsScreen;
     public GameObject SettingsScreen;
-    public GameObject EndLevelScreen;
-    public string levelSelectScreen;
-    public string nextLevelName;
+
+    public enum Menu { pauseMenu, controlsMenu, settingsMenu };
+
+    // The animator in control of the page flip animation
+    public Animator flipAnimator;
 
     private void Awake()
     {
@@ -29,13 +31,9 @@ public class InGameMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GamePaused)
-            {
                 Resume();
-            } 
             else
-            {
                 Pause();
-            }
         }
     }
 
@@ -46,7 +44,6 @@ public class InGameMenu : MonoBehaviour
         GamePaused = false;
     }
 
-
     public void Pause()
     {
         PauseScreen.SetActive(true);
@@ -54,6 +51,61 @@ public class InGameMenu : MonoBehaviour
         GamePaused = true;
     }
 
+    public void FlipPage()
+    {
+        // TODO: Fade out the buttons
+
+        // Animate the page flipping
+        flipAnimator.SetBool("isFlipped", true);
+
+        // TODO: Fade in the buttons on new screen
+    }
+
+    public void FlipPageBack()
+    {
+        // TODO: Fade out the buttons
+
+        // Mark the page flipping bool as false
+        flipAnimator.SetBool("isFlipped", false);
+
+        // TODO: Fade in the buttons on main pause screen
+    }
+
+    public void LoadMenu(int menuType)
+    {
+        // Turn off all the screens
+        if (PauseScreen != null) PauseScreen.SetActive(false);
+        if (ControlsScreen != null) ControlsScreen.SetActive(false);
+        if (SettingsScreen != null) SettingsScreen.SetActive(false);
+
+        // Turn on the requested screen
+        switch ((Menu)menuType)
+        {
+            case Menu.pauseMenu:
+                if (PauseScreen != null)
+                    PauseScreen.SetActive(true);
+                else
+                    Debug.Log("PauseScreen variable not set in script.");
+                break;
+            case Menu.controlsMenu:
+                if (ControlsScreen != null)
+                    ControlsScreen.SetActive(true);
+                else
+                    Debug.Log("ControlsScreen variable not set in script.");
+                break;
+            case Menu.settingsMenu:
+                if (SettingsScreen != null)
+                    SettingsScreen.SetActive(true);
+                else
+                    Debug.Log("SettingsScreen variable not set in script.");
+                break;
+            default:
+                Debug.LogError("Menu Type is undefined.");
+                break;
+        }
+    }
+
+    /*
     public void ControlsLoad()
     {
         PauseScreen.SetActive(false);
@@ -78,19 +130,10 @@ public class InGameMenu : MonoBehaviour
         PauseScreen.SetActive(true);
     }
 
-    public void EndLevelLoad()
-    {
-        // Just in case
-        PauseScreen.SetActive(false);
-        ControlsScreen.SetActive(false);
-        
-        EndLevelScreen.SetActive(true);
-    }
-
     public void ReturnMenu()
     {
         Time.timeScale = 1;
         GamePaused = false;
-        SceneManager.LoadScene(levelSelectScreen);
     }
+    */
 }

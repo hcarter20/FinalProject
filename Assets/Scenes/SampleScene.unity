@@ -192,8 +192,8 @@ Canvas:
   m_GameObject: {fileID: 282370189}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
@@ -217,7 +217,7 @@ RectTransform:
   m_Children:
   - {fileID: 1941523268}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -239,9 +239,7 @@ MonoBehaviour:
   PauseScreen: {fileID: 1636608841}
   ControlsScreen: {fileID: 0}
   SettingsScreen: {fileID: 0}
-  EndLevelScreen: {fileID: 0}
-  levelSelectScreen: 
-  nextLevelName: 
+  flipAnimator: {fileID: 1957022668}
 --- !u!1 &367295624
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,7 +321,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 367295627}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 282370194}
+        m_TargetAssemblyTypeName: InGameMenu, Assembly-CSharp
+        m_MethodName: FlipPage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 282370194}
+        m_TargetAssemblyTypeName: InGameMenu, Assembly-CSharp
+        m_MethodName: LoadMenu
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &367295627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,7 +684,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1192571161
 GameObject:
@@ -745,7 +767,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1192571164}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 282370194}
+        m_TargetAssemblyTypeName: InGameMenu, Assembly-CSharp
+        m_MethodName: FlipPage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 282370194}
+        m_TargetAssemblyTypeName: InGameMenu, Assembly-CSharp
+        m_MethodName: LoadMenu
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1192571164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1032,6 +1078,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1941523267}
   m_CullTransparentMesh: 1
+--- !u!95 &1957022668 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2900920781183595859, guid: c20a96c7fe3106a4bbe0a4bf6426fdc8, type: 3}
+  m_PrefabInstance: {fileID: 2900920781886915196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2115254062 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2900920781183595858, guid: c20a96c7fe3106a4bbe0a4bf6426fdc8, type: 3}
