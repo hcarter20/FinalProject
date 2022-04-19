@@ -36,8 +36,8 @@ public class Clickable : MonoBehaviour
     private void Update()
     {
         // Automatically destroy when the gameplay transition happens
-        if (GameManager.S.gameState != GameState.stacking)
-            Destroy(gameObject);
+        // if (GameManager.S.gameState != GameState.stacking)
+        //    Destroy(gameObject);
 
         // When following the cursor, update position to stay with it
         if (tracking)

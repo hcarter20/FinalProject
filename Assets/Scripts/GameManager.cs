@@ -44,13 +44,25 @@ public class GameManager : MonoBehaviour
         S = this;
     }
 
+    public void Start()
+    {
+        if (LevelManager.S != null)
+            LoadLevel(LevelManager.S.Levels[LevelManager.S.levelIndex]);
+    }
+
     /* Called by the LevelManager: specifies which level of gameplay to initialize */
     public void LoadLevel(Level levelInfo)
     {
-        // Load the princess
+        Debug.Log("Loading the level " + levelInfo.LevelIndex);
 
         // Load the linen closet
 
+
+        // Setup the minion spawner
+
+
+        // temp: Prepare for actual gameplay
+        Setup();
     }
 
     /* Triggered by the button on the initial intro menu */
@@ -70,8 +82,8 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         // Temp: Hit the escape key to exit the game
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Application.Quit();
+        // if (Input.GetKeyDown(KeyCode.Escape))
+        //    Application.Quit();
 
         // Update the timer through the update method
         if (isCountdown && (gameState == GameState.stacking || gameState == GameState.sleeping))

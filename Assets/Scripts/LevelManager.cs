@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
     public string LossScene = "GameOver";
 
     // Used to modify the gameplay each time the level is loaded
-    private int levelIndex = 0;
+    public int levelIndex = 0;
 
     public List<Level> Levels;
 
@@ -32,7 +32,10 @@ public class LevelManager : MonoBehaviour
     {
         // Setup the singleton
         if (S == null)
+        {
             S = this;
+            DontDestroyOnLoad(this);
+        }
         else
             Destroy(this);
     }
@@ -41,7 +44,7 @@ public class LevelManager : MonoBehaviour
     public void StartFromTitle()
     {
         if (debug)
-            LoadScene(GameScene);
+            NextLevel();
         else
             LoadScene(IntroScene);
     }
@@ -56,7 +59,11 @@ public class LevelManager : MonoBehaviour
     public void PassLevel()
     {
         levelIndex++;
-        LoadScene(SelectScene);
+
+        if (debug)
+            NextLevel();
+        else
+            LoadScene(SelectScene);
     }
 
     /* Triggered when player fails gameplay, moves to game over */
@@ -69,7 +76,8 @@ public class LevelManager : MonoBehaviour
     public void NextLevel()
     {
         LoadScene(GameScene);
-        GameManager.S.LoadLevel(Levels[levelIndex]);
+        // GameManager will call when it's awakened
+        // GameManager.S.LoadLevel(Levels[levelIndex]);
     }
 
     private void LoadScene(string sceneName)

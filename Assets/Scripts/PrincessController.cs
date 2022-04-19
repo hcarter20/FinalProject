@@ -20,6 +20,11 @@ public class PrincessController : MonoBehaviour
     // The initial rotation of the princess (failure check)
     private float initialRotationZ;
 
+    // The set of princess sprites to load from
+    public List<Sprite> princessSprites;
+
+    // Whether the princess should have 
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,6 +38,15 @@ public class PrincessController : MonoBehaviour
         coll.enabled = false;
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.25f);
         isSleeping = false;
+
+        if (LevelManager.S != null)
+        {
+            // Setup the sprite
+            int index = LevelManager.S.Levels[LevelManager.S.levelIndex].LevelIndex;
+            sr.sprite = princessSprites[index];
+
+            // TODO: setup princess's traits
+        }
     }
 
     public void Activate()

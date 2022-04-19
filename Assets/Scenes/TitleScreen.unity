@@ -1477,4 +1477,10 @@ MonoBehaviour:
   GameScene: Bedroom
   VictoryScene: Victory
   LossScene: GameOver
-  LevelCount: 5
+  levelIndex: 0
+  Levels:
+  - LevelIndex: 0
+  - LevelIndex: 1
+  - LevelIndex: 2
+  - LevelIndex: 3
+  - LevelIndex: 4

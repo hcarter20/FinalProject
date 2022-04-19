@@ -2599,7 +2599,7 @@ MonoBehaviour:
   - {fileID: 2729116044034303870}
   - {fileID: 2729116044689075326}
   dampValues:
-  - 0.7
+  - 0.5
   stiffValues:
   - 15
 --- !u!114 &2729116045552546287
@@ -2625,6 +2625,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6089678799545063480}
+  - component: {fileID: 4856854118017865818}
   - component: {fileID: 1216239957548521892}
   m_Layer: 0
   m_Name: Inner Collider
@@ -2647,6 +2648,27 @@ Transform:
   m_Father: {fileID: 2729116045552546286}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &4856854118017865818
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8404065093427371528}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.4
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!70 &1216239957548521892
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
