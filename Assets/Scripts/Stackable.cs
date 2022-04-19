@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StackItem { pillow, cushion, mattress, pea, watermelon, melonslice, icecube, crown };
+public enum StackItem { pillow, cushion, mattress, pea, watermelon, melonslice, icecube, crown, flan };
 
 public class Stackable : MonoBehaviour
 {
