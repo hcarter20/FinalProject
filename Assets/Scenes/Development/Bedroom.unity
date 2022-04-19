@@ -3879,7 +3879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 1874849592}
-  physicsObject: {fileID: 3494643405892677056, guid: 3ebc74b63efcc284092113fae2cc4de2, type: 3}
+  physicsObject: {fileID: 2316486469809538917, guid: d890edfde29a3af4c984aa46e23a3fd7, type: 3}
   respawn: 1
   boxCol: {fileID: 1874849591}
 --- !u!61 &1874849591
