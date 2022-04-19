@@ -1338,7 +1338,8 @@ MonoBehaviour:
   bones: []
   centerBone: {fileID: 3045097818422053585}
   brokenPrefab: {fileID: 1724806122360672758, guid: 8ae26d2ee0106304f961cb82fa2c8c9f, type: 3}
-  breakingForce: 3.5
+  breakingForce: 2
+  breakNoise: 0
 --- !u!1 &5019639509867498344
 GameObject:
   m_ObjectHideFlags: 0

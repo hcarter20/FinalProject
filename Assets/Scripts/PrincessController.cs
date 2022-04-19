@@ -89,7 +89,7 @@ public class PrincessController : MonoBehaviour
         }
     }
 
-    private void WakeUp()
+    public void WakeUp()
     {
         isSleeping = false;
         GameManager.S.FailLevel();
