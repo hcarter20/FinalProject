@@ -23,6 +23,9 @@ public class LevelManager : MonoBehaviour
     public string VictoryScene = "Victory";
     public string LossScene = "GameOver";
 
+    // How many total levels? (So know when to go to victory)
+    public int TotalLevelCount = 5;
+
     // Used to modify the gameplay each time the level is loaded
     public int levelIndex = 0;
 
@@ -59,6 +62,12 @@ public class LevelManager : MonoBehaviour
     public void PassLevel()
     {
         levelIndex++;
+
+        if (levelIndex >= TotalLevelCount)
+        {
+            LoadScene(VictoryScene);
+            return;
+        }
 
         if (debug)
             NextLevel();

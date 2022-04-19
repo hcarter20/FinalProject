@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     // The princess character controller
     public PrincessController princess;
+    // The linen closet controller
+    public ClosetController closet;
     // The minion spawner
     public MinionSpawner minionSpawner;
     // The collider which defines the bed bounds
