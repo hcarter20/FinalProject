@@ -16,6 +16,15 @@ public class Stackable : MonoBehaviour
     // Used to melt the ice cube
     private bool isMelting = false;
 
+    private void Start()
+    {
+        // Automatically signal to the GameManager that you've spawned
+        if (isHazard && GameManager.S != null)
+        {
+            GameManager.S.HazardSpawned(itemType);
+        }
+    }
+
     private void FixedUpdate()
     {
         if (itemType == StackItem.icecube && GameManager.S.gameState == GameState.sleeping && !isMelting)

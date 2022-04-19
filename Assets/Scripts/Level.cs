@@ -8,7 +8,8 @@ public class Level
     // Also acts as index for the princess
     public int LevelIndex;
 
-
+    // How many hazards are required to be placed?
+    public int HazardCount;
 }
 
 /* What changes for each level?

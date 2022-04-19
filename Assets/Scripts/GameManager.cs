@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
     // Boolean used to track whether the timer is counting down
     private bool isCountdown = false;
 
+    // The level settings which control how the level is initialized
+    private Level levelSettings;
+
     private void Awake()
     {
         S = this;
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour
     public void LoadLevel(Level levelInfo)
     {
         Debug.Log("Loading the level " + levelInfo.LevelIndex);
+        levelSettings = levelInfo;
 
         // Load the linen closet
 
@@ -106,6 +110,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void HazardSpawned(StackItem itemType)
+    {
+        // In future, check against the actual object,
+        // for now just count down the total num required
+
+        if (itemType != StackItem.melonslice)
+        {
+            levelSettings.HazardCount--;
+        }
+    }
+
     /* Triggered by UI button press directly from game */
     public void FinishStacking()
     {
@@ -133,14 +148,24 @@ public class GameManager : MonoBehaviour
         if (stackButton.gameObject.activeInHierarchy)
             stackButton.gameObject.SetActive(false);
 
-        // Give a moment of transition from day to night
-        yield return new WaitForSeconds(transitionTime);
-        
-        // Move into the night time gameplay
-        princess.Activate();
-        timeLeft = sleepTime;
-        isCountdown = true;
-        gameState = GameState.sleeping;
+        // If player didn't manage to place all required items, fail early
+        if (levelSettings.HazardCount > 0)
+        {
+            timerText.text = "Items are missing!";
+            yield return new WaitForSeconds(transitionTime);
+            FailLevel();
+        }
+        else
+        {
+            // Give a moment of transition from day to night
+            yield return new WaitForSeconds(transitionTime);
+
+            // Move into the night time gameplay
+            princess.Activate();
+            timeLeft = sleepTime;
+            isCountdown = true;
+            gameState = GameState.sleeping;
+        }
     }
 
     public void FailLevel()
