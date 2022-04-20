@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 3331285355074346613}
   - component: {fileID: 3331285355074346612}
   - component: {fileID: 3331285355074346615}
-  - component: {fileID: 5957891956324988453}
+  - component: {fileID: -6917370343665147584}
   m_Layer: 0
   m_Name: StackIceCube
   m_TagString: Cold
@@ -200,8 +200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isHazard: 1
   itemType: 6
---- !u!58 &5957891956324988453
-CircleCollider2D:
+--- !u!61 &-6917370343665147584
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -214,8 +214,18 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.5, y: 2.5}
+    newSize: {x: 2.5, y: 2.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 3
+  m_Size: {x: 2, y: 2}
+  m_EdgeRadius: 0
 --- !u!1 &7476477949655277411
 GameObject:
   m_ObjectHideFlags: 0

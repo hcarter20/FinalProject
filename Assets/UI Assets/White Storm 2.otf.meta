@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: f3a77b82589924ad68ff6deab136a5e9
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - White Storm
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 8b9e648f966175246b7984fd98a66522, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
