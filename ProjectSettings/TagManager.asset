@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - BedArea
+  - Noisy
+  - Cold
+  - TempTrigger
+  - SoundTrigger
   layers:
   - Default
   - TransparentFX
