@@ -9,10 +9,14 @@ public class MinionController : MonoBehaviour
     // The movement speed of the minion, when moving normally or after startle (fleeing)
     public float defaultSpeed = 1.0f;
     public float fleeSpeed = 2.0f;
-    // The prefab for the actual physics object corresponding to the hazard we're carrying
-    public GameObject hazardPrefab;
 
-    // The hazard object which we're carrying with us (assumed to be child game object)
+    // Used to load based on level
+    public List<GameObject> hazardPrefabs;
+    public List<GameObject> hazardPropPrefabs;
+
+    // The prefab for the actual physics object corresponding to the hazard we're carrying
+    private GameObject hazardPrefab;
+    // The hazard object which we're carrying with us
     private GameObject hazardProp;
 
     // The current state of the minion (used to control its behavior)
@@ -27,7 +31,15 @@ public class MinionController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        hazardProp = transform.GetChild(0).gameObject;
+
+        int index = 0;
+
+        int count = hazardPropPrefabs.Count;
+        if (count > 1)
+            index = Random.Range(0, count);
+
+        hazardPrefab = hazardPrefabs[index];
+        hazardProp = Instantiate(hazardPropPrefabs[index], transform);
     }
 
     /* OnMouseUpAsButton triggers when mouse released after being pressed on object's collider (i.e. clicked).

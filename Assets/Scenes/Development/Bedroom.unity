@@ -417,7 +417,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0baea4422570bcc40aca3c1fc2670fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minionPrefab: {fileID: 6596110863072710847, guid: 11baada8b75e54a49b9e34fb81e86d7d, type: 3}
+  minionPrefabs:
+  - {fileID: 0}
+  - {fileID: 1088351399500870001, guid: be81db5679d219b47bcc94de6dea6fb1, type: 3}
+  - {fileID: 8897249728959727675, guid: 2a30678646b458440a192701572e3b88, type: 3}
+  - {fileID: 7110621224560067141, guid: 626c0d19a267a0643b75dc4f6b71e296, type: 3}
+  - {fileID: 4198364560275469367, guid: 42114a33d370fde4a802943f10f5bdb8, type: 3}
   target: {fileID: 1968012012}
   exit: {fileID: 452476746}
   flee: {fileID: 89868304}
@@ -1486,11 +1491,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
-  stackTime: 30
-  sleepTime: 6
+  stackTime: 45
+  sleepTime: 8
   transitionTime: 1
   princess: {fileID: 1565378838}
-  closet: {fileID: 0}
+  closet: {fileID: 91700236}
   minionSpawner: {fileID: 321266333}
   bedBounds: {fileID: 1171260891}
   closetBounds: {fileID: 150063403}

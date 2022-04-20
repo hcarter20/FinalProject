@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MinionSpawner : MonoBehaviour
 {
-    // The game object prefab for the minion
-    public GameObject minionPrefab;
+    // The game object prefabs for the minion
+    public List<GameObject> minionPrefabs;
+    private GameObject minionPrefab;
     // Where is the minion trying to get to, to drop the item?
     public Transform target, exit, flee;
     // How long between minions appearing? (Give or take 1 second)
@@ -19,13 +20,27 @@ public class MinionSpawner : MonoBehaviour
 
     public void StartSpawning()
     {
-        minionCoroutine = StartCoroutine(MinionTimer());
+        // Setup the minion prefab for this level
+        if (LevelManager.S == null)
+            minionPrefab = minionPrefabs[0];
+        else
+        {
+            int index = LevelManager.S.Levels[LevelManager.S.levelIndex].LevelIndex;
+            minionPrefab = minionPrefabs[index];
+        }
+
+        // TODO: On final level, minions appear more often
+
+        if (minionPrefab != null)
+            minionCoroutine = StartCoroutine(MinionTimer());
     }
 
     public void StopSpawning()
     {
-        StopCoroutine(minionCoroutine);
-        Destroy(minion);
+        if (minionCoroutine != null)
+            StopCoroutine(minionCoroutine);
+        if (minion != null)
+            Destroy(minion);
     }
 
     private IEnumerator MinionTimer()
