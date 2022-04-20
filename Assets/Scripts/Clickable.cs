@@ -89,10 +89,10 @@ public class Clickable : MonoBehaviour
             // Are we within the linen closet area (i.e. trying to unselect)?
             if (boxCol.bounds.Intersects(GameManager.S.closetBounds.bounds))
             {
-                /*
+                
                 Debug.Log("Unselecting this item: " + boxCol.bounds.ToString()
                     + " vs " + GameManager.S.bedBounds.bounds.ToString());
-                */
+                
 
                 // Indicate that the mouse will be free, before self destruct
                 if (GameManager.S != null)
@@ -109,10 +109,9 @@ public class Clickable : MonoBehaviour
             // Are we within the bed bounds area?
             if (!boxCol.bounds.Intersects(GameManager.S.bedBounds.bounds))
             {
-                /*
                 Debug.LogError("Not within bounds of the bed: " + boxCol.bounds.ToString()
                     + " vs " + GameManager.S.bedBounds.bounds.ToString());
-                */
+                
                 return;
             }
 
@@ -122,11 +121,11 @@ public class Clickable : MonoBehaviour
             Collider2D col = Physics2D.OverlapBox(origin, scaledSize, 0.0f, LayerMask.GetMask(new string[] { "Default" }));
             if (col != null)
             {
-                /*
+                
                 Debug.LogError("Collider " + col.gameObject.name + " is in this area: " 
                     + col.bounds.ToString() + " vs our box at " + origin.ToString() + " with size " + boxCol.size.ToString());
                 Debug.LogError("Mouse click is at " + Camera.main.ScreenToWorldPoint(Input.mousePosition).ToString());
-                */
+                
                 return;
             }
 
@@ -138,7 +137,8 @@ public class Clickable : MonoBehaviour
                 GameManager.S.hasClickable = false;
 
             // Self destruct this image object
-            Destroy(hiddenObject);
+            if (hiddenObject != null)
+                Destroy(hiddenObject);
             Destroy(gameObject);
         }
     }

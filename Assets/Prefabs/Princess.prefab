@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 3366360803245008670}
   - component: {fileID: 219381252372590036}
   - component: {fileID: 2383057252844506521}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TempTrigger
   m_TagString: TempTrigger
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 7328708516148600410}
   - component: {fileID: 3591904148950883825}
   - component: {fileID: 3630910666691970587}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SoundTrigger
   m_TagString: SoundTrigger
   m_Icon: {fileID: 0}
