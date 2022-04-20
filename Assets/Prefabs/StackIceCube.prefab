@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 3331285355074346612}
   - component: {fileID: 3331285355074346615}
   - component: {fileID: 5957891956324988453}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: StackIceCube
   m_TagString: Cold
   m_Icon: {fileID: 0}
