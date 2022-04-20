@@ -19,6 +19,7 @@ public class Clickable : MonoBehaviour
     public GameObject physicsObject;
     // Does the clickable icon continue to exist after click, spawning a duplicate to follow the mouse?
     public bool respawn;
+    private GameObject hiddenObject;
 
     // The BoxCollider2D component attached to this objecet
     public BoxCollider2D boxCol;
@@ -57,12 +58,23 @@ public class Clickable : MonoBehaviour
 
         if (!tracking)
         {
+            // Abort early if the GameManager already has a clickable
+            if (GameManager.S != null && GameManager.S.hasClickable)
+                return;
+
             // If set to respawn, create a duplicate in the selection area
             if (respawn)
                 Instantiate(gameObject, transform.parent);
+            else
+            {
+                hiddenObject = Instantiate(gameObject, transform.parent);
+                hiddenObject.SetActive(false);
+            }
 
             // Begin updating to follow cursor position
             tracking = true;
+            if (GameManager.S != null)
+                GameManager.S.hasClickable = true;
 
             // Set the scale of this game object to match the physics object
             transform.parent = null;
@@ -81,6 +93,15 @@ public class Clickable : MonoBehaviour
                 Debug.Log("Unselecting this item: " + boxCol.bounds.ToString()
                     + " vs " + GameManager.S.bedBounds.bounds.ToString());
                 */
+
+                // Indicate that the mouse will be free, before self destruct
+                if (GameManager.S != null)
+                    GameManager.S.hasClickable = false;
+
+                // Replace this item at original position if unselect, to prevent disappearing
+                if (!respawn)
+                    hiddenObject.SetActive(true);
+
                 Destroy(gameObject);
                 return;
             }
@@ -112,7 +133,12 @@ public class Clickable : MonoBehaviour
             // Create a physics object at this place
             Instantiate(physicsObject, transform.position, physicsObject.transform.rotation);
 
+            // Indicate that the mouse will be free, before self destruct
+            if (GameManager.S != null)
+                GameManager.S.hasClickable = false;
+
             // Self destruct this image object
+            Destroy(hiddenObject);
             Destroy(gameObject);
         }
     }

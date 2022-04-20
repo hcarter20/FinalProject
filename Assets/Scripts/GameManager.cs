@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviour
     // The level settings which control how the level is initialized
     private Level levelSettings;
 
+    // Temp solution: tracks whether an object is trailing the mouse
+    public bool hasClickable = false;
+
     private void Awake()
     {
         S = this;
