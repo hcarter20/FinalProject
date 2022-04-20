@@ -65,7 +65,10 @@ public class LevelManager : MonoBehaviour
 
         if (levelIndex >= TotalLevelCount)
         {
-            LoadScene(VictoryScene);
+            if (debug)
+                ReturnToTitle();
+            else
+                LoadScene(VictoryScene);
             return;
         }
 
@@ -78,7 +81,10 @@ public class LevelManager : MonoBehaviour
     /* Triggered when player fails gameplay, moves to game over */
     public void FailLevel()
     {
-        LoadScene(LossScene);
+        if (debug)
+            ReturnToTitle();
+        else
+            LoadScene(LossScene);
     }
 
     /* Load the next level of gameplay from the level select scene */
