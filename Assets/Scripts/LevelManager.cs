@@ -66,9 +66,14 @@ public class LevelManager : MonoBehaviour
         if (levelIndex >= TotalLevelCount)
         {
             if (debug)
+            {
+                // Reset the level index, to avoid bugs
+                levelIndex = 0;
                 ReturnToTitle();
+            }
             else
                 LoadScene(VictoryScene);
+
             return;
         }
 
