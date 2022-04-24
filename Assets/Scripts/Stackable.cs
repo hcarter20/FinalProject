@@ -16,15 +16,6 @@ public class Stackable : MonoBehaviour
     // Used to melt the ice cube
     private bool isMelting = false;
 
-    private void Start()
-    {
-        // Automatically signal to the GameManager that you've spawned
-        if (isHazard && GameManager.S != null)
-        {
-            GameManager.S.HazardSpawned(itemType);
-        }
-    }
-
     private void FixedUpdate()
     {
         if (itemType == StackItem.icecube && GameManager.S.gameState == GameState.sleeping && !isMelting)
@@ -50,5 +41,29 @@ public class Stackable : MonoBehaviour
 
         // Once it reaches such a small size, it's destroyed
         Destroy(gameObject);
+    }
+
+    public bool Overlaps(Bounds bounds)
+    {
+        Collider2D[] childColliders = GetComponentsInChildren<Collider2D>();
+        foreach (Collider2D col in childColliders)
+        {
+            if (col.bounds.Intersects(bounds))
+                return true;
+        }
+
+        return false;
+    }
+
+    public bool Inside(Bounds bounds)
+    {
+        Collider2D[] childColliders = GetComponentsInChildren<Collider2D>();
+        foreach (Collider2D col in childColliders)
+        {
+            if (!col.bounds.Intersects(bounds))
+                return false;
+        }
+
+        return true;
     }
 }

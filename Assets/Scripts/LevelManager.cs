@@ -24,12 +24,19 @@ public class LevelManager : MonoBehaviour
     public string LossScene = "GameOver";
 
     // How many total levels? (So know when to go to victory)
-    public int TotalLevelCount = 5;
+    public int LevelCount = 5;
 
     // Used to modify the gameplay each time the level is loaded
     public int levelIndex = 0;
 
-    public List<Level> Levels;
+    // All of the values which change for each level
+    public List<float> stackTimes;
+    public List<float> sleepTimes;
+    public List<Sprite> princessSprites;
+    public List<GameObject> closetPrefabs;
+    public List<GameObject> minionPrefabs;
+    public List<float> minionTimes;
+    public List<float> slideSpeeds;
 
     private void Awake()
     {
@@ -63,7 +70,7 @@ public class LevelManager : MonoBehaviour
     {
         levelIndex++;
 
-        if (levelIndex >= TotalLevelCount)
+        if (levelIndex >= LevelCount)
         {
             if (debug)
             {
@@ -96,8 +103,6 @@ public class LevelManager : MonoBehaviour
     public void NextLevel()
     {
         LoadScene(GameScene);
-        // GameManager will call when it's awakened
-        // GameManager.S.LoadLevel(Levels[levelIndex]);
     }
 
     private void LoadScene(string sceneName)

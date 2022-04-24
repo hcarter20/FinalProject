@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PrincessController : MonoBehaviour
 {
+    // Singleton declaration
+    public static PrincessController princess;
+
     // How far can the princess rotate (in degrees) before the player fails?
     public float maxRotateZ = 30.0f;
 
@@ -20,10 +23,13 @@ public class PrincessController : MonoBehaviour
     // The initial rotation of the princess (failure check)
     private float initialRotationZ;
 
-    // The set of princess sprites to load from
-    public List<Sprite> princessSprites;
-
-    // Whether the princess should have 
+    private void Awake()
+    {
+        if (princess == null)
+            princess = this;
+        else
+            Destroy(this);
+    }
 
     private void Start()
     {
@@ -39,14 +45,8 @@ public class PrincessController : MonoBehaviour
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.25f);
         isSleeping = false;
 
-        if (LevelManager.S != null)
-        {
-            // Setup the sprite
-            int index = LevelManager.S.Levels[LevelManager.S.levelIndex].LevelIndex;
-            sr.sprite = princessSprites[index];
-
-            // TODO: setup princess's traits
-        }
+        // Setup the sprite for this level
+        sr.sprite = LevelManager.S.princessSprites[LevelManager.S.levelIndex];
     }
 
     public void Activate()

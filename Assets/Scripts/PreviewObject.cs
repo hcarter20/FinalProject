@@ -87,6 +87,9 @@ public class PreviewObject : MonoBehaviour
         if (GameManager.S != null)
             GameManager.S.hasClickable = false;
 
+        // Indicate that the item has been placed in the scene
+        ClosetController.S.ItemPlaced(physicsObject);
+
         // Self destruct this preview & its clickable object
         if (!clickableParent.respawn)
             Destroy(clickableParent);

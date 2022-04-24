@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class MinionSpawner : MonoBehaviour
 {
-    // The game object prefabs for the minion
-    public List<GameObject> minionPrefabs;
-    private GameObject minionPrefab;
+    // Singleton declaration
+    public static MinionSpawner S;
+
     // Where is the minion trying to get to, to drop the item?
     public Transform target, exit, flee;
     // Toggle on flee option: minion flees straight up after startle
     public float fleeHeight = 0.0f;
     public bool fleeUp = false;
-    // How long between minions appearing? (Give or take 1 second)
-    public float minionTime = 10.0f;
+
+    // The game object prefab for the minion
+    private GameObject minionPrefab;
+    // The time between minion spawns (give or take 1 second)
+    private float minionTime;
 
     // Reference to the currently instantiated minion
     private GameObject minion;
@@ -21,19 +24,21 @@ public class MinionSpawner : MonoBehaviour
     // The coroutine which spawns minions
     private Coroutine minionCoroutine;
 
+    private void Awake()
+    {
+        if (S == null)
+            S = this;
+        else
+            Destroy(this);
+    }
+
     public void StartSpawning()
     {
-        // Setup the minion prefab for this level
-        if (LevelManager.S == null)
-            minionPrefab = minionPrefabs[0];
-        else
-        {
-            int index = LevelManager.S.Levels[LevelManager.S.levelIndex].LevelIndex;
-            minionPrefab = minionPrefabs[index];
-        }
+        // Setup for this level
+        minionPrefab = LevelManager.S.minionPrefabs[LevelManager.S.levelIndex];
+        minionTime = LevelManager.S.minionTimes[LevelManager.S.levelIndex];
 
-        // TODO: On final level, minions appear more often
-
+        // If minion prefab is null, means that minions shouldn't appear this level
         if (minionPrefab != null)
             minionCoroutine = StartCoroutine(MinionTimer());
     }

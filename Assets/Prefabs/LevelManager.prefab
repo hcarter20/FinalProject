@@ -50,16 +50,47 @@ MonoBehaviour:
   GameScene: Bedroom
   VictoryScene: Victory
   LossScene: GameOver
-  TotalLevelCount: 5
+  LevelCount: 5
   levelIndex: 0
-  Levels:
-  - LevelIndex: 0
-    HazardCount: 1
-  - LevelIndex: 1
-    HazardCount: 1
-  - LevelIndex: 2
-    HazardCount: 1
-  - LevelIndex: 3
-    HazardCount: 2
-  - LevelIndex: 4
-    HazardCount: 3
+  stackTimes:
+  - 30
+  - 30
+  - 30
+  - 30
+  - 30
+  sleepTimes:
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  princessSprites:
+  - {fileID: 21300000, guid: 7dc05c1cb552e514d932eabb4891f5d8, type: 3}
+  - {fileID: 21300000, guid: b60fa9ddca3779a43a47028a03d67c92, type: 3}
+  - {fileID: 21300000, guid: 091320f16cc15554db6bfd53d300ea61, type: 3}
+  - {fileID: 21300000, guid: a5f64cc7c40954146a9fa9ca62f4dbac, type: 3}
+  - {fileID: 21300000, guid: 3e77370e54684864c98035bc0f6b3be2, type: 3}
+  closetPrefabs:
+  - {fileID: 4969893999457233056, guid: ed3a47c08321c9249b8f953c4d65c5dc, type: 3}
+  - {fileID: 4700030673411653493, guid: db5f4713572740440950daf30acf5473, type: 3}
+  - {fileID: 8241126135692526828, guid: 55929c493670f964384096d815cf0613, type: 3}
+  - {fileID: 6263312420344722965, guid: 997c1c1ac9d7a60499e3b6e5cef890b8, type: 3}
+  - {fileID: 6821322100286707174, guid: 3a479367b76521c47bb9b16272663f0b, type: 3}
+  minionPrefabs:
+  - {fileID: 0}
+  - {fileID: 1088351399500870001, guid: be81db5679d219b47bcc94de6dea6fb1, type: 3}
+  - {fileID: 8897249728959727675, guid: 2a30678646b458440a192701572e3b88, type: 3}
+  - {fileID: 7110621224560067141, guid: 626c0d19a267a0643b75dc4f6b71e296, type: 3}
+  - {fileID: 4198364560275469367, guid: 42114a33d370fde4a802943f10f5bdb8, type: 3}
+  minionTimes:
+  - 0
+  - 10
+  - 10
+  - 10
+  - 8
+  slideSpeeds:
+  - 3
+  - 3.5
+  - 4
+  - 4.5
+  - 5

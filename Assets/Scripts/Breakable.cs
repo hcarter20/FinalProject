@@ -36,12 +36,15 @@ public class Breakable : MonoBehaviour
             cumulativeForces = 0.0f;
         }
     }
+
     private void Break()
     {
-        // TODO: Is it safe to do this? Could the new prefab collide with this one before it's destroyed?
-
         // Create the prefab object at the location of the watermelon
-        Instantiate(brokenPrefab, centerBone.transform.position, centerBone.transform.rotation);
+        Transform center = centerBone.transform;
+        GameObject brokenObject = Instantiate(brokenPrefab, center.position, center.rotation);
+
+        // Tell the ClosetController that we've been replaced
+        ClosetController.S.ItemBroken(brokenObject);
 
         // Destroy this game object
         Destroy(gameObject);

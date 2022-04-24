@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum GameState { setup, stacking, sleeping, gameOverLose, gameOverWin };
+public enum GameState { setup, stacking, sunset, sleeping, gameOverLose, gameOverWin };
 
 public class GameManager : MonoBehaviour
 {
@@ -18,21 +18,8 @@ public class GameManager : MonoBehaviour
     // The amount of time to transition between states (in seconds)
     public float transitionTime = 1.0f;
 
-    // The princess character controller
-    public PrincessController princess;
-    // The linen closet controller
-    public ClosetController closet;
-    // The minion spawner
-    public MinionSpawner minionSpawner;
-    // The collider which defines the bed bounds
-    public BoxCollider2D bedBounds;
-    // The collider which defines the linen closet bounds
-    public BoxCollider2D closetBounds;
-
     // Text UI Element that marks timer for sleep section
     public Text timerText;
-    // Text UI Element that gives the princess's requirements
-    public Text infoText;
     // Button which can end the stacking phase early
     public Button stackButton;
 
@@ -41,11 +28,14 @@ public class GameManager : MonoBehaviour
     // Boolean used to track whether the timer is counting down
     private bool isCountdown = false;
 
-    // The level settings which control how the level is initialized
-    private Level levelSettings;
-
-    // Temp solution: tracks whether an object is trailing the mouse
+    // Temp: For free placement of objects with mouse
+    // Tracks whether an object is trailing the mouse
     public bool hasClickable = false;
+    // The collider which defines the bed bounds
+    public BoxCollider2D bedBounds;
+    // The collider which defines the linen closet bounds
+    public BoxCollider2D closetBounds;
+
 
     private void Awake()
     {
@@ -54,24 +44,12 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        if (LevelManager.S != null)
-            LoadLevel(LevelManager.S.Levels[LevelManager.S.levelIndex]);
-    }
+        // Load the values for this level
+        stackTime = LevelManager.S.stackTimes[LevelManager.S.levelIndex];
+        sleepTime = LevelManager.S.sleepTimes[LevelManager.S.levelIndex];
 
-    /* Called by the LevelManager: specifies which level of gameplay to initialize */
-    public void LoadLevel(Level levelInfo)
-    {
-        Debug.Log("Loading the level " + levelInfo.LevelIndex);
-        levelSettings = levelInfo;
-
-        // Load the linen closet
-
-
-        // Setup the minion spawner
-
-
-        // temp: Prepare for actual gameplay
-        Setup();
+        if (LevelManager.S.debug)
+            Setup();
     }
 
     /* Triggered by the button on the initial intro menu */
@@ -84,16 +62,11 @@ public class GameManager : MonoBehaviour
         // Start the stacking phase
         gameState = GameState.stacking;
         isCountdown = true;
-        if (minionSpawner != null)
-            minionSpawner.StartSpawning();
+        MinionSpawner.S.StartSpawning();
     }
 
     private void Update()
     {
-        // Temp: Hit the escape key to exit the game
-        // if (Input.GetKeyDown(KeyCode.Escape))
-        //    Application.Quit();
-
         // Update the timer through the update method
         if (isCountdown && (gameState == GameState.stacking || gameState == GameState.sleeping))
         {
@@ -110,17 +83,6 @@ public class GameManager : MonoBehaviour
                 else if (gameState == GameState.sleeping)
                     StartCoroutine(Victory());
             }
-        }
-    }
-
-    public void HazardSpawned(StackItem itemType)
-    {
-        // In future, check against the actual object,
-        // for now just count down the total num required
-
-        if (itemType != StackItem.melonslice)
-        {
-            levelSettings.HazardCount--;
         }
     }
 
@@ -143,32 +105,38 @@ public class GameManager : MonoBehaviour
     private IEnumerator BeginNighttime()
     {
         // TODO: Play sound effect? Some signal of the transition?
+        gameState = GameState.sunset;
 
         // Stop the minions from spawning anymore
-        if (minionSpawner != null)
-            minionSpawner.StopSpawning();
+        MinionSpawner.S.StopSpawning();
+
         // Remove the button for the end of stacking
         if (stackButton.gameObject.activeInHierarchy)
             stackButton.gameObject.SetActive(false);
 
-        // If player didn't manage to place all required items, fail early
-        if (levelSettings.HazardCount > 0)
+        // Check for failure in making the bed
+        int validate = ClosetController.S.ValidateItems();
+        if (validate == 2)
         {
             timerText.text = "Items are missing!";
             yield return new WaitForSeconds(transitionTime);
             FailLevel();
         }
-        else
+        else if (validate == 1)
         {
-            // Give a moment of transition from day to night
+            timerText.text = "Items aren't in bed!";
             yield return new WaitForSeconds(transitionTime);
-
-            // Move into the night time gameplay
-            princess.Activate();
-            timeLeft = sleepTime;
-            isCountdown = true;
-            gameState = GameState.sleeping;
+            FailLevel();
         }
+
+        // Give a moment of transition from day to night
+        yield return new WaitForSeconds(transitionTime);
+
+        // Move into the night time gameplay
+        PrincessController.princess.Activate();
+        timeLeft = sleepTime;
+        isCountdown = true;
+        gameState = GameState.sleeping;
     }
 
     public void FailLevel()
