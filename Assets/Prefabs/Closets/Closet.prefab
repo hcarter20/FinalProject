@@ -122,10 +122,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39692bbeb178e164da3b52d7f9722d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 6092490650292800967}
-  physicsObject: {fileID: 3340701905640130444, guid: e8b01af77a9fbc34fbf982804144c700, type: 3}
   respawn: 1
-  boxCol: {fileID: 6092490650292800966}
+  sprite: {fileID: 6092490650292800967}
+  previewPrefab: {fileID: 3581097750375046596, guid: 45d3ca2e39b3b6e47b0699fcec357f9b, type: 3}
 --- !u!1 &6092490650305094770
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,10 +247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39692bbeb178e164da3b52d7f9722d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 6092490650305094769}
-  physicsObject: {fileID: 3987500862338540342, guid: 6d44526c36882c1428fbdfcc7bc9e56b, type: 3}
   respawn: 0
-  boxCol: {fileID: 6092490650305094768}
+  sprite: {fileID: 6092490650305094769}
+  previewPrefab: {fileID: 8086338183243112889, guid: 061e334215c8d2640a1270413e7b01b8, type: 3}
 --- !u!1 &6092490650311672627
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,10 +372,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39692bbeb178e164da3b52d7f9722d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 6092490650311672655}
-  physicsObject: {fileID: 3340701905640130444, guid: e8b01af77a9fbc34fbf982804144c700, type: 3}
   respawn: 1
-  boxCol: {fileID: 6092490650311672654}
+  sprite: {fileID: 6092490650311672655}
+  previewPrefab: {fileID: 3581097750375046596, guid: 45d3ca2e39b3b6e47b0699fcec357f9b, type: 3}
 --- !u!1 &6092490650353027686
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,10 +621,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39692bbeb178e164da3b52d7f9722d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 6092490650562041882}
-  physicsObject: {fileID: 1105192970009566854, guid: d23d1a582e06ab345926725a056e854e, type: 3}
   respawn: 1
-  boxCol: {fileID: 6092490650562041885}
+  sprite: {fileID: 6092490650562041882}
+  previewPrefab: {fileID: 4616819608047078777, guid: 7eeccece5daca9b429247f30c7095bf3, type: 3}
 --- !u!1 &6092490650637037703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,10 +1204,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39692bbeb178e164da3b52d7f9722d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 6092490651399782144}
-  physicsObject: {fileID: 5575559382027700484, guid: a1d68b9b659fe7d41b0d00befa9c76d6, type: 3}
   respawn: 1
-  boxCol: {fileID: 6092490651399782147}
+  sprite: {fileID: 6092490651399782144}
+  previewPrefab: {fileID: 5965303155011392505, guid: 88fb98f66382f8244950ac4dc159f78a, type: 3}
 --- !u!1 &6092490651474581535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,10 +1329,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39692bbeb178e164da3b52d7f9722d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 6092490651474581531}
-  physicsObject: {fileID: 5575559382027700484, guid: a1d68b9b659fe7d41b0d00befa9c76d6, type: 3}
   respawn: 1
-  boxCol: {fileID: 6092490651474581530}
+  sprite: {fileID: 6092490651474581531}
+  previewPrefab: {fileID: 5965303155011392505, guid: 88fb98f66382f8244950ac4dc159f78a, type: 3}
 --- !u!1 &6092490651565261538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1460,10 +1454,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39692bbeb178e164da3b52d7f9722d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 6092490651565261566}
-  physicsObject: {fileID: 2729116045552546259, guid: c0b39084ac73cf949a0cce6efc1598c8, type: 3}
   respawn: 0
-  boxCol: {fileID: 6092490651565261537}
+  sprite: {fileID: 6092490651565261566}
+  previewPrefab: {fileID: 6521222567478832365, guid: 8077da969f5307940804f6ff809672c9, type: 3}
 --- !u!1 &6092490651652847010
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,10 +1579,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39692bbeb178e164da3b52d7f9722d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 6092490651652847038}
-  physicsObject: {fileID: 5575559382027700484, guid: a1d68b9b659fe7d41b0d00befa9c76d6, type: 3}
   respawn: 1
-  boxCol: {fileID: 6092490651652847009}
+  sprite: {fileID: 6092490651652847038}
+  previewPrefab: {fileID: 5965303155011392505, guid: 88fb98f66382f8244950ac4dc159f78a, type: 3}
 --- !u!1 &6092490651655272737
 GameObject:
   m_ObjectHideFlags: 0
@@ -1712,10 +1704,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39692bbeb178e164da3b52d7f9722d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 6092490651655272765}
-  physicsObject: {fileID: 1105192970009566854, guid: d23d1a582e06ab345926725a056e854e, type: 3}
   respawn: 1
-  boxCol: {fileID: 6092490651655272764}
+  sprite: {fileID: 6092490651655272765}
+  previewPrefab: {fileID: 4616819608047078777, guid: 7eeccece5daca9b429247f30c7095bf3, type: 3}
 --- !u!1 &6092490651922953697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1895,10 +1886,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39692bbeb178e164da3b52d7f9722d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 6092490651964165859}
-  physicsObject: {fileID: 3331285355074346611, guid: 18f627d7e6646f140807282d08a748de, type: 3}
   respawn: 0
-  boxCol: {fileID: 6092490651964165858}
+  sprite: {fileID: 6092490651964165859}
+  previewPrefab: {fileID: 9079509690994906363, guid: 366fe056228e32a4e95ddebd9dffc35b, type: 3}
 --- !u!1 &6092490651992324334
 GameObject:
   m_ObjectHideFlags: 0
@@ -2021,10 +2011,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39692bbeb178e164da3b52d7f9722d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 6092490651992324330}
-  physicsObject: {fileID: 5019639508895872977, guid: d93a952b55a732b4d82977e03bc3150e, type: 3}
   respawn: 0
-  boxCol: {fileID: 6092490651992324333}
+  sprite: {fileID: 6092490651992324330}
+  previewPrefab: {fileID: 7987137495524554901, guid: b017e7b88a631554cabd176b3987db76, type: 3}
 --- !u!1 &6092490652106055418
 GameObject:
   m_ObjectHideFlags: 0
@@ -2311,7 +2300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39692bbeb178e164da3b52d7f9722d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 6092490652132660662}
-  physicsObject: {fileID: 92032655032492149, guid: a834582ac51254a4da66ea10f505d912, type: 3}
   respawn: 0
-  boxCol: {fileID: 6092490652132660665}
+  sprite: {fileID: 6092490652132660662}
+  previewPrefab: {fileID: 5872013609808409660, guid: 377edad921ea3254fbf49863d5416eb3, type: 3}

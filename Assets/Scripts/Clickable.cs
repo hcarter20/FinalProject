@@ -13,39 +13,27 @@ using UnityEngine;
 
 public class Clickable : MonoBehaviour
 {
-    // The spriter renderer component of this game object: for transparency effects
-    public SpriteRenderer sprite;
-    // The physics object prefab to instantiate when placed
-    public GameObject physicsObject;
     // Does the clickable icon continue to exist after click, spawning a duplicate to follow the mouse?
     public bool respawn;
-    private GameObject hiddenObject;
 
-    // The BoxCollider2D component attached to this objecet
-    public BoxCollider2D boxCol;
+    // The spriter renderer component of this game object: for transparency effects
+    public SpriteRenderer sprite;
 
-    // Is the game object currently tracking with the player's cursor?
-    private bool tracking = false;
+    // A prefab for the physics object preview
+    public GameObject previewPrefab;
+
+    // The preview object spawned from this
+    private PreviewObject currentPreview;
+    // Is this object currently in hiding/should ignore clicks?
+    private bool ignoreClick;
+
 
     private void Start()
     {
-        if (sprite == null || physicsObject == null)
-            Debug.LogError("Clickable objects not fully setup in editor.");
-        boxCol = GetComponent<BoxCollider2D>();
-    }
-
-    private void Update()
-    {
-        // Automatically destroy when the gameplay transition happens
-        // if (GameManager.S.gameState != GameState.stacking)
-        //    Destroy(gameObject);
-
-        // When following the cursor, update position to stay with it
-        if (tracking)
+        if (sprite == null)
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 currPosition = transform.position;
-            transform.position = new Vector3(mousePosition.x, mousePosition.y, currPosition.z);
+            Debug.LogError("Clickable objects not fully setup in editor.");
+            sprite = GetComponent<SpriteRenderer>();
         }
     }
 
@@ -53,93 +41,35 @@ public class Clickable : MonoBehaviour
      * On first click, begin tracking with the cursor. On second click, place physics object at current location. */
     private void OnMouseUpAsButton()
     {
-        // Temp: check if this object is receiving the mouse click raycast
-        // Debug.Log("OnMouseUp on object " + gameObject.name);
+        if (ignoreClick)
+            return;
 
-        if (!tracking)
+        if (currentPreview == null)
         {
             // Abort early if the GameManager already has a clickable
             if (GameManager.S != null && GameManager.S.hasClickable)
                 return;
 
-            // If set to respawn, create a duplicate in the selection area
-            if (respawn)
-                Instantiate(gameObject, transform.parent);
-            else
+            // If not set to "respawn", hide this in the selection area
+            if (!respawn)
             {
-                hiddenObject = Instantiate(gameObject, transform.parent);
-                hiddenObject.SetActive(false);
+                // Make this invisible, stop accepting clicks
+                sprite.enabled = false;
+                ignoreClick = true;
             }
 
-            // Begin updating to follow cursor position
-            tracking = true;
+            // Create a preview object to follow cursor position
             if (GameManager.S != null)
                 GameManager.S.hasClickable = true;
 
-            // Set the scale of this game object to match the physics object
-            transform.parent = null;
-            transform.localScale = physicsObject.transform.localScale;
-
-            // Make the sprite partially transparent
-            Color currColor = sprite.color;
-            sprite.color = new Color(currColor.r, currColor.g, currColor.b, 0.5f);
+            currentPreview = Instantiate(previewPrefab).GetComponent<PreviewObject>();
+            currentPreview.clickableParent = this;
         }
-        else
-        {
-            // Are we within the linen closet area (i.e. trying to unselect)?
-            if (boxCol.bounds.Intersects(GameManager.S.closetBounds.bounds))
-            {
-                
-                Debug.Log("Unselecting this item: " + boxCol.bounds.ToString()
-                    + " vs " + GameManager.S.bedBounds.bounds.ToString());
-                
+    }
 
-                // Indicate that the mouse will be free, before self destruct
-                if (GameManager.S != null)
-                    GameManager.S.hasClickable = false;
-
-                // Replace this item at original position if unselect, to prevent disappearing
-                if (!respawn)
-                    hiddenObject.SetActive(true);
-
-                Destroy(gameObject);
-                return;
-            }
-
-            // Are we within the bed bounds area?
-            if (!boxCol.bounds.Intersects(GameManager.S.bedBounds.bounds))
-            {
-                Debug.LogError("Not within bounds of the bed: " + boxCol.bounds.ToString()
-                    + " vs " + GameManager.S.bedBounds.bounds.ToString());
-                
-                return;
-            }
-
-            // Check the collision of trying to place the object here
-            Vector2 origin = new Vector2(transform.position.x, transform.position.y);
-            Vector2 scaledSize = new Vector2(boxCol.size.x * transform.lossyScale.x, boxCol.size.y * transform.lossyScale.y);
-            Collider2D col = Physics2D.OverlapBox(origin, scaledSize, 0.0f, LayerMask.GetMask(new string[] { "Default" }));
-            if (col != null)
-            {
-                
-                Debug.LogError("Collider " + col.gameObject.name + " is in this area: " 
-                    + col.bounds.ToString() + " vs our box at " + origin.ToString() + " with size " + boxCol.size.ToString());
-                Debug.LogError("Mouse click is at " + Camera.main.ScreenToWorldPoint(Input.mousePosition).ToString());
-                
-                return;
-            }
-
-            // Create a physics object at this place
-            Instantiate(physicsObject, transform.position, physicsObject.transform.rotation);
-
-            // Indicate that the mouse will be free, before self destruct
-            if (GameManager.S != null)
-                GameManager.S.hasClickable = false;
-
-            // Self destruct this image object
-            if (hiddenObject != null)
-                Destroy(hiddenObject);
-            Destroy(gameObject);
-        }
+    public void ReEnable()
+    {
+        sprite.enabled = true;
+        ignoreClick = false;
     }
 }
