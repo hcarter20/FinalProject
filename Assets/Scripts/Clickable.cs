@@ -16,11 +16,13 @@ public class Clickable : MonoBehaviour
     // Does the clickable icon continue to exist after click, spawning a duplicate to follow the mouse?
     public bool respawn;
 
-    // The spriter renderer component of this game object: for transparency effects
+    // The spriter renderer component of this game object: for hiding object
     public SpriteRenderer sprite;
 
     // A prefab for the physics object preview
     public GameObject previewPrefab;
+    // A prefab for the physics object
+    public GameObject physicsPrefab;
 
     // The preview object spawned from this
     private PreviewObject currentPreview;
@@ -44,7 +46,16 @@ public class Clickable : MonoBehaviour
         if (ignoreClick)
             return;
 
-        if (currentPreview == null)
+        if (SlidingSpawner.S != null && SlidingSpawner.S.currObject == null)
+        {
+            if (SlidingSpawner.S.AddObject(this, physicsPrefab) && !respawn)
+            {
+                // Make this invisible, stop accepting clicks
+                sprite.enabled = false;
+                ignoreClick = true;
+            }
+        }
+        else if (currentPreview == null)
         {
             // Abort early if the GameManager already has a clickable
             if (GameManager.S != null && GameManager.S.hasClickable)
