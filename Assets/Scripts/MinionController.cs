@@ -6,6 +6,7 @@ public class MinionController : MonoBehaviour
 {
     // Where is the minion trying to get to, to drop the item?
     public Vector2 targetPosition, exitPosition, fleePosition;
+    public float fleeHeight;
     // The movement speed of the minion, when moving normally or after startle (fleeing)
     public float defaultSpeed = 1.0f;
     public float fleeSpeed = 2.0f;
@@ -42,37 +43,6 @@ public class MinionController : MonoBehaviour
         hazardProp = Instantiate(hazardPropPrefabs[index], transform);
     }
 
-    /* OnMouseUpAsButton triggers when mouse released after being pressed on object's collider (i.e. clicked).
-     * When clicked, interrupts the minion and forces them to fly off. */
-    private void OnMouseUpAsButton()
-    {
-        // Trigger the click animation
-        if (animator != null)
-            animator.SetTrigger("Click");
-
-        // Minion has been startled, transition to fleeing
-        StartCoroutine(Flee());
-    }
-
-    private IEnumerator DropObject()
-    {
-        moveState = MoveState.drop;
-
-        Transform hazardTransform = hazardProp.transform;
-        Destroy(hazardProp);
-        Instantiate(hazardPrefab, hazardTransform.position, hazardTransform.rotation, null);
-
-        yield return new WaitForSeconds(0.1f);
-        moveState = MoveState.leave;
-    }
-
-    private IEnumerator Flee()
-    {
-        moveState = MoveState.startle;
-        yield return new WaitForSeconds(0.5f);
-        moveState = MoveState.flee;
-    }
-
     private void FixedUpdate()
     {
         if (moveState == MoveState.approach)
@@ -97,6 +67,58 @@ public class MinionController : MonoBehaviour
                 MovePosition(fleePosition, fleeSpeed);
         }
     }
+
+    /* OnMouseUpAsButton triggers when mouse released after being pressed on object's collider (i.e. clicked).
+     * When clicked, interrupts the minion and forces them to fly off. */
+    private void OnMouseUpAsButton()
+    {
+        // Trigger the click animation
+        if (animator != null)
+            animator.SetTrigger("Click");
+
+        // Minion has been startled, transition to fleeing
+        if (moveState == MoveState.approach)
+            StartCoroutine(DropObjectThenFlee());
+        else
+            StartCoroutine(Flee());
+    }
+
+    private IEnumerator DropObject()
+    {
+        moveState = MoveState.drop;
+
+        Transform hazardTransform = hazardProp.transform;
+        Destroy(hazardProp);
+        Instantiate(hazardPrefab, hazardTransform.position, hazardTransform.rotation, null);
+
+        yield return new WaitForSeconds(0.1f);
+        moveState = MoveState.leave;
+    }
+
+    private IEnumerator Flee()
+    {
+        moveState = MoveState.startle;
+        yield return new WaitForSeconds(0.5f);
+
+        if (fleeHeight != 0.0f)
+            fleePosition = new Vector2(transform.position.x, fleeHeight);
+        moveState = MoveState.flee;
+    }
+    private IEnumerator DropObjectThenFlee()
+    {
+        moveState = MoveState.startle;
+
+        Transform hazardTransform = hazardProp.transform;
+        Destroy(hazardProp);
+        Instantiate(hazardPrefab, hazardTransform.position, hazardTransform.rotation, null);
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (fleeHeight != 0.0f)
+            fleePosition = new Vector2(transform.position.x, fleeHeight);
+        moveState = MoveState.flee;
+    }
+
 
     private void MovePosition(Vector2 goal, float speed)
     {
