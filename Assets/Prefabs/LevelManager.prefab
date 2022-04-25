@@ -94,3 +94,9 @@ MonoBehaviour:
   - 4
   - 4.5
   - 5
+  speedIncrs:
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.2

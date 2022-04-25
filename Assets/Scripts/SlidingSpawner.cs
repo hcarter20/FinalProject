@@ -13,6 +13,7 @@ public class SlidingSpawner : MonoBehaviour
 
     // The speed for this level of the object when sliding
     private float speed;
+    private float speedIncr;
 
     // The game object which is currently sliding back and forth
     [HideInInspector]
@@ -34,6 +35,7 @@ public class SlidingSpawner : MonoBehaviour
     {
         // Setup the speed for this level
         speed = LevelManager.S.slideSpeeds[LevelManager.S.levelIndex];
+        speedIncr = LevelManager.S.speedIncrs[LevelManager.S.levelIndex];
     }
 
     private void Update()
@@ -94,6 +96,9 @@ public class SlidingSpawner : MonoBehaviour
         clickableParent = newParent;
         targetPosition = rightPosition;
 
+        // Increase the speed with each object
+        speed += speedIncr;
+
         // Signal successful placement
         return true;
     }
@@ -123,6 +128,9 @@ public class SlidingSpawner : MonoBehaviour
 
         // Destroy the object
         Destroy(currObject);
+
+        // Undo the speed incr (didn't really count)
+        speed -= speedIncr;
     }
 
     // OnDrawGizmos only affects the Unity editor, draws the sliding path

@@ -37,6 +37,7 @@ public class LevelManager : MonoBehaviour
     public List<GameObject> minionPrefabs;
     public List<float> minionTimes;
     public List<float> slideSpeeds;
+    public List<float> speedIncrs;
 
     private void Awake()
     {
