@@ -1,33 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
+public enum Menu { pauseMenu, controlsMenu, settingsMenu };
 
 public class InGameMenu : MonoBehaviour
 {
-    public static bool GamePaused = false;
+    // Singleton declaration
     public static InGameMenu menu;
+    public static bool GamePaused = false;
     
-    public GameObject PauseScreen;
-    public GameObject ControlsScreen;
-    public GameObject SettingsScreen;
-
-    public enum Menu { pauseMenu, controlsMenu, settingsMenu };
-
     // The animator in control of the page flip animation
     public Animator flipAnimator;
+    // For convenience, manually set how long the page flip takes
+    public float pageFlipTime;
+
+    // The overlay which is always active when game is paused
+    public GameObject PauseOverlay;
+    // The elements which are applied over top of the book, for each screen
+    public InGameScreen PauseScreen;
+    public InGameScreen ControlsScreen;
+    public InGameScreen SettingsScreen;
+
+    // Which screen is currently open
+    private InGameScreen currScreen;
 
     private void Awake()
     {
-        // Prevent the UI from being destroyed when we reload the scene
         if (menu == null)
             menu = this;
         else
             Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update() {
+    private void Start()
+    {
+        PauseOverlay.SetActive(false);
+    }
+
+    private void Update() 
+    {
+        // Listens to the pause menu controls
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GamePaused)
@@ -39,101 +52,73 @@ public class InGameMenu : MonoBehaviour
 
     public void Resume()
     {
-        PauseScreen.SetActive(false);
+        currScreen.HideScreen();
+        currScreen.gameObject.SetActive(false);
+        PauseOverlay.SetActive(false);
         Time.timeScale = 1;
         GamePaused = false;
     }
 
     public void Pause()
     {
-        PauseScreen.SetActive(true);
+        PauseOverlay.SetActive(true);
         Time.timeScale = 0;
         GamePaused = true;
+
+        // Load the pause menu
+        currScreen = PauseScreen;
+        PauseScreen.gameObject.SetActive(true);
     }
 
-    public void FlipPage()
+    public void QuitLevel()
     {
-        // TODO: Fade out the buttons
+        // Delegate to the level manager
+        LevelManager.S.ReturnToTitle();
+    }
+
+    // Called by button action: flip to a new menu, with full animations
+    public void OpenMenu(int menuType)
+    {
+        // Convert from enum to game object
+        Menu newMenu = (Menu)menuType;
+        bool forward = newMenu != Menu.pauseMenu;
+        InGameScreen newScreen = EnumToScreen(newMenu);
+
+        // Animate the current menu fading out, page flipping, new menu fading in
+        StartCoroutine(FlipPage(currScreen, newScreen, forward));
+
+        // Update our current screen variable
+        currScreen = newScreen;
+    }
+
+    private IEnumerator FlipPage(InGameScreen prevScreen, InGameScreen newScreen, bool forward)
+    {
+        // Pause for 1 second to allow for button fade out animation
+        prevScreen.HideScreen();
+        yield return new WaitForSecondsRealtime(1.0f);
+        prevScreen.gameObject.SetActive(false);
 
         // Animate the page flipping
-        flipAnimator.SetBool("isFlipped", true);
+        flipAnimator.SetBool("isFlipped", forward);
+        yield return new WaitForSecondsRealtime(pageFlipTime);
 
-        // TODO: Fade in the buttons on new screen
+        // Trigger the button fade in animation
+        newScreen.gameObject.SetActive(true);
     }
 
-    public void FlipPageBack()
+    private InGameScreen EnumToScreen(Menu menuType)
     {
-        // TODO: Fade out the buttons
-
-        // Mark the page flipping bool as false
-        flipAnimator.SetBool("isFlipped", false);
-
-        // TODO: Fade in the buttons on main pause screen
-    }
-
-    public void LoadMenu(int menuType)
-    {
-        // Turn off all the screens
-        if (PauseScreen != null) PauseScreen.SetActive(false);
-        if (ControlsScreen != null) ControlsScreen.SetActive(false);
-        if (SettingsScreen != null) SettingsScreen.SetActive(false);
-
-        // Turn on the requested screen
-        switch ((Menu)menuType)
+        switch (menuType)
         {
             case Menu.pauseMenu:
-                if (PauseScreen != null)
-                    PauseScreen.SetActive(true);
-                else
-                    Debug.Log("PauseScreen variable not set in script.");
-                break;
+                return PauseScreen;
             case Menu.controlsMenu:
-                if (ControlsScreen != null)
-                    ControlsScreen.SetActive(true);
-                else
-                    Debug.Log("ControlsScreen variable not set in script.");
-                break;
+                return ControlsScreen;
             case Menu.settingsMenu:
-                if (SettingsScreen != null)
-                    SettingsScreen.SetActive(true);
-                else
-                    Debug.Log("SettingsScreen variable not set in script.");
-                break;
+                return SettingsScreen;
             default:
                 Debug.LogError("Menu Type is undefined.");
-                break;
+                return null;
         }
     }
-
-    /*
-    public void ControlsLoad()
-    {
-        PauseScreen.SetActive(false);
-        ControlsScreen.SetActive(true);
-    }
-
-    public void ControlsReturn()
-    {
-        ControlsScreen.SetActive(false);
-        PauseScreen.SetActive(true);
-    }
-
-    public void SettingsLoad()
-    {
-        PauseScreen.SetActive(false);
-        SettingsScreen.SetActive(true);
-    }
-
-    public void SettingsReturn()
-    {
-        SettingsScreen.SetActive(false);
-        PauseScreen.SetActive(true);
-    }
-
-    public void ReturnMenu()
-    {
-        Time.timeScale = 1;
-        GamePaused = false;
-    }
-    */
 }

@@ -53,11 +53,11 @@ MonoBehaviour:
   LevelCount: 5
   levelIndex: 0
   stackTimes:
-  - 30
-  - 30
-  - 30
-  - 30
-  - 30
+  - 45
+  - 45
+  - 45
+  - 45
+  - 60
   sleepTimes:
   - 5
   - 5
