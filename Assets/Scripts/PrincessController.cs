@@ -89,6 +89,8 @@ public class PrincessController : MonoBehaviour
                     Debug.Log("Princess collided with " + collision.gameObject.name);
 
                 WakeUp();
+
+                AudioManager.S.Play("Bonk");
             }
             else if (bedding.isHazard)
             {

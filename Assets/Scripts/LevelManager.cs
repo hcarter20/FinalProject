@@ -50,6 +50,15 @@ public class LevelManager : MonoBehaviour
         else
             Destroy(this);
     }
+    private void Start()
+    {
+        // In normal usage, we start at the title scene
+        if (SceneManager.GetActiveScene().name.Equals(TitleScene))
+        {
+            // Start playing the title music
+            AudioManager.S.PlayTitleMusic();
+        }
+    }
 
     /* Called by the Start button on the Title Menu */
     public void StartFromTitle()
