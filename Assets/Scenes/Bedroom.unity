@@ -2140,7 +2140,8 @@ MonoBehaviour:
   leftPosition: {x: -4.5, y: 3, z: 0}
   rightPosition: {x: 4.5, y: 3, z: 0}
   startPosition: {x: 0, y: 3, z: 0}
-  currObject: {fileID: 0}
+  cooldownTime: 0.3
+  isOpen: 1
 --- !u!1 &1307925653
 GameObject:
   m_ObjectHideFlags: 0

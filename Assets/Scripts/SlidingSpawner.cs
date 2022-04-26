@@ -11,13 +11,18 @@ public class SlidingSpawner : MonoBehaviour
     public Vector3 leftPosition, rightPosition, startPosition;
     private Vector3 targetPosition;
 
+    // How much of a cooldown is required before we can take another object
+    public float cooldownTime;
+
     // The speed for this level of the object when sliding
     private float speed;
     private float speedIncr;
 
-    // The game object which is currently sliding back and forth
+    // Indicates whether the slider is currently accepting objects
     [HideInInspector]
-    public GameObject currObject;
+    public bool isOpen = true;
+    // The game object which is currently sliding back and forth
+    private GameObject currObject;
 
     // The clickable script which spawned it
     private Clickable clickableParent;
@@ -45,12 +50,12 @@ public class SlidingSpawner : MonoBehaviour
             CancelObject();
 
         // When spacebar is pressed, drop the object
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && currObject != null)
         {
             DropObject();
         }
         // When Left Shift is pressed, cancel the currently selected object
-        else if (Input.GetKeyDown(KeyCode.LeftShift))
+        else if (Input.GetKeyDown(KeyCode.LeftShift) && currObject != null)
         {
             CancelObject();
         }
@@ -85,6 +90,9 @@ public class SlidingSpawner : MonoBehaviour
         if (currObject != null)
             return false;
 
+        // Set ourselves as unavailable
+        isOpen = false;
+
         // Instantiate the physics prefab, turn on kinematic, start moving
         GameObject newObject = Instantiate(newPrefab);
         foreach (Rigidbody2D rb in newObject.GetComponentsInChildren<Rigidbody2D>())
@@ -118,6 +126,9 @@ public class SlidingSpawner : MonoBehaviour
 
         // Stop controlling this object
         currObject = null;
+
+        // Re-open availability after delay
+        StartCoroutine(DelayedOpen());
     }
 
     private void CancelObject()
@@ -131,6 +142,17 @@ public class SlidingSpawner : MonoBehaviour
 
         // Undo the speed incr (didn't really count)
         speed -= speedIncr;
+
+        // Can immediately reopen
+        isOpen = true;
+    }
+
+    private IEnumerator DelayedOpen()
+    {
+        // Wait for fixed time before next object allowed
+        yield return new WaitForSeconds(cooldownTime);
+
+        isOpen = true;
     }
 
     // OnDrawGizmos only affects the Unity editor, draws the sliding path

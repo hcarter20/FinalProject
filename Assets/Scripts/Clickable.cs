@@ -46,7 +46,7 @@ public class Clickable : MonoBehaviour
         if (ignoreClick)
             return;
 
-        if (SlidingSpawner.S != null && SlidingSpawner.S.currObject == null)
+        if (SlidingSpawner.S != null && SlidingSpawner.S.isOpen)
         {
             if (SlidingSpawner.S.AddObject(this, physicsPrefab) && !respawn)
             {
@@ -59,6 +59,10 @@ public class Clickable : MonoBehaviour
         {
             // Abort early if the GameManager already has a clickable
             if (GameManager.S != null && GameManager.S.hasClickable)
+                return;
+
+            // Abort early if the slider already has an object
+            if (SlidingSpawner.S != null && !SlidingSpawner.S.isOpen)
                 return;
 
             // If not set to "respawn", hide this in the selection area

@@ -10,6 +10,9 @@ public class PrincessController : MonoBehaviour
     // How far can the princess rotate (in degrees) before the player fails?
     public float maxRotateZ = 30.0f;
 
+    // The child 2d capsule collider of this game object
+    public CapsuleCollider2D outlineCollider;
+
     // The rigidbody component on this game object
     private Rigidbody2D rb;
     // The 2d collider component on this game object
@@ -53,8 +56,32 @@ public class PrincessController : MonoBehaviour
 
     public void Activate()
     {
-        rb.isKinematic = false;
+        // Check if the player has placed an overlapping object, prevent clipping
+        Vector2 origin = new Vector2(transform.position.x + outlineCollider.offset.x, transform.position.y + outlineCollider.offset.y);
+        Vector2 point = origin;
+        Vector2 scaledSize = new Vector2(outlineCollider.size.x * transform.lossyScale.x, outlineCollider.size.y * transform.lossyScale.y);
+        CapsuleDirection2D direction = outlineCollider.direction;
+        LayerMask defaultLayer = LayerMask.GetMask(new string[] { "Default" });
+
+        Collider2D col;
+        while ((col = Physics2D.OverlapCapsule(point, scaledSize, direction, 0.0f, defaultLayer)) != null)
+        {
+            /*
+            Debug.LogError("Collider " + col.gameObject.name + " is in this area: "
+                + col.bounds.ToString() + " vs our capsule at " + point.ToString() + " with size " + scaledSize.ToString());
+            */
+            // Move the princess up and try again
+            point += new Vector2(0.0f, 0.2f);
+        }
+
+        //Debug.Log("It's safe to add princess with capsule at " + point.ToString() + " with size " + scaledSize.ToString());
+
+        float yDiff = point.y - origin.y;
+        if (yDiff != 0.0f)
+            transform.position += new Vector3(0.0f, yDiff, 0.0f);
+
         coll.enabled = true;
+        rb.isKinematic = false;
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1.0f);
         initialRotationZ = ToDegrees(transform.eulerAngles.z);
         isSleeping = true;
