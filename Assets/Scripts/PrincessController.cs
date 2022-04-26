@@ -45,8 +45,10 @@ public class PrincessController : MonoBehaviour
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.25f);
         isSleeping = false;
 
-        // Setup the sprite for this level
+        // Customize the princess for this level
         sr.sprite = LevelManager.S.princessSprites[LevelManager.S.levelIndex];
+        float newHeight = LevelManager.S.princessHeights[LevelManager.S.levelIndex];
+        transform.position = new Vector3(transform.position.x, newHeight, transform.position.z);
     }
 
     public void Activate()
