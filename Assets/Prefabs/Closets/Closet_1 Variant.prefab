@@ -7,13 +7,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 76556171610846173, guid: 788a88cb247d3c748a41edc1440ce791, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6092490650305094770, guid: 788a88cb247d3c748a41edc1440ce791, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6092490650305095054, guid: 788a88cb247d3c748a41edc1440ce791, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6092490650983067952, guid: 788a88cb247d3c748a41edc1440ce791, type: 3}
       propertyPath: m_Name
-      value: Closet_1
+      value: Closet_1 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6092490650983067953, guid: 788a88cb247d3c748a41edc1440ce791, type: 3}
       propertyPath: m_RootOrder
@@ -57,6 +65,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6092490650983067953, guid: 788a88cb247d3c748a41edc1440ce791, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6177664602941873497, guid: 788a88cb247d3c748a41edc1440ce791, type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

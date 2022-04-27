@@ -8,7 +8,9 @@ public class PrincessController : MonoBehaviour
     public static PrincessController princess;
 
     // How far can the princess rotate (in degrees) before the player fails?
-    public float maxRotateZ = 30.0f;
+    public float maxRotateZ = 20.0f;
+    // How far can the princess fall (from initial spawn position) before the player fails?
+    public float maxFallDist;
 
     // The child 2d capsule collider of this game object
     public CapsuleCollider2D outlineCollider;
@@ -23,8 +25,10 @@ public class PrincessController : MonoBehaviour
     // Is the princess currently asleep (looking for disruptions)
     private bool isSleeping;
 
-    // The initial rotation of the princess (failure check)
+    // Position/rotation of princess when physics triggered (failure check)
     private float initialRotationZ;
+    private float initialPositionY;
+    private bool noCollision = true;
 
     private void Awake()
     {
@@ -50,6 +54,7 @@ public class PrincessController : MonoBehaviour
 
         // Customize the princess for this level
         sr.sprite = LevelManager.S.princessSprites[LevelManager.S.levelIndex];
+        maxFallDist = LevelManager.S.princessMaxFalls[LevelManager.S.levelIndex];
         float newHeight = LevelManager.S.princessHeights[LevelManager.S.levelIndex];
         transform.position = new Vector3(transform.position.x, newHeight, transform.position.z);
     }
@@ -84,6 +89,7 @@ public class PrincessController : MonoBehaviour
         rb.isKinematic = false;
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1.0f);
         initialRotationZ = ToDegrees(transform.eulerAngles.z);
+        initialPositionY = transform.position.y;
         isSleeping = true;
     }
 
@@ -105,6 +111,20 @@ public class PrincessController : MonoBehaviour
     {
         if (isSleeping)
         {
+            // If this is the first collision, check fall distance
+            if (noCollision)
+            {
+                noCollision = false;
+                float fallDist = Mathf.Abs(initialPositionY - transform.position.y);
+                Debug.Log("Princess has fallen " + fallDist + " units.");
+
+                if (fallDist > maxFallDist)
+                {
+                    Debug.Log("Princess fell too far down!");
+                    WakeUp();
+                }
+            }
+
             // Check if the item princess collided with is bedding
             Stackable bedding = collision.gameObject.GetComponentInParent<Stackable>();
 

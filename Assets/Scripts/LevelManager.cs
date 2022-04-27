@@ -34,6 +34,7 @@ public class LevelManager : MonoBehaviour
     public List<float> sleepTimes;
     public List<Sprite> princessSprites;
     public List<float> princessHeights;
+    public List<float> princessMaxFalls;
     public List<GameObject> closetPrefabs;
     public List<GameObject> minionPrefabs;
     public List<float> minionTimes;

@@ -76,6 +76,12 @@ MonoBehaviour:
   - 0.3
   - 0.3
   - 0.3
+  princessMaxFalls:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
   closetPrefabs:
   - {fileID: 4969893999457233056, guid: ed3a47c08321c9249b8f953c4d65c5dc, type: 3}
   - {fileID: 4700030673411653493, guid: db5f4713572740440950daf30acf5473, type: 3}
