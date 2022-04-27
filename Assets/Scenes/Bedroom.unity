@@ -3400,24 +3400,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7594754578225619618, guid: a63ace768d941504d80b8d47ca3fd33c, type: 3}
-      propertyPath: princessHeights.Array.data[0]
-      value: -1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7594754578225619618, guid: a63ace768d941504d80b8d47ca3fd33c, type: 3}
-      propertyPath: princessHeights.Array.data[1]
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7594754578225619618, guid: a63ace768d941504d80b8d47ca3fd33c, type: 3}
-      propertyPath: princessHeights.Array.data[2]
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7594754578225619618, guid: a63ace768d941504d80b8d47ca3fd33c, type: 3}
-      propertyPath: princessHeights.Array.data[3]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7594754578225619618, guid: a63ace768d941504d80b8d47ca3fd33c, type: 3}
-      propertyPath: princessHeights.Array.data[4]
-      value: 0.5
+      propertyPath: levelIndex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a63ace768d941504d80b8d47ca3fd33c, type: 3}

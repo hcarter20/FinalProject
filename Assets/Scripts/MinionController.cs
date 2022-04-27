@@ -123,7 +123,8 @@ public class MinionController : MonoBehaviour
     private void MovePosition(Vector2 goal, float speed)
     {
         // Flip the sprite depending on direction of motion
-        sprite.flipX = (transform.position.x <= goal.x);
+        // sprite.flipX = (transform.position.x <= goal.x);
+        // transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
 
         // Move the minion towards the goal position
         Vector2 currPosition = new Vector2(transform.position.x, transform.position.y);

@@ -71,11 +71,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a5f64cc7c40954146a9fa9ca62f4dbac, type: 3}
   - {fileID: 21300000, guid: 3e77370e54684864c98035bc0f6b3be2, type: 3}
   princessHeights:
-  - 0.3
-  - 0.3
-  - 0.3
-  - 0.3
-  - 0.3
+  - -1.5
+  - -1
+  - -0.5
+  - 0
+  - 0.5
   princessMaxFalls:
   - 1
   - 1
