@@ -116,11 +116,9 @@ public class PrincessController : MonoBehaviour
             {
                 noCollision = false;
                 float fallDist = Mathf.Abs(initialPositionY - transform.position.y);
-                Debug.Log("Princess has fallen " + fallDist + " units.");
-
                 if (fallDist > maxFallDist)
                 {
-                    Debug.Log("Princess fell too far down!");
+                    Debug.Log("Princess fell too far down! Distance of " + fallDist + "units.");
                     WakeUp();
                 }
             }

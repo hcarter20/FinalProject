@@ -54,11 +54,11 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
-  - name: Staccato BGM
+  - name: Stacking BGM
     isMusic: 1
     clip: {fileID: 8300000, guid: a1b51ea1afa53bc4098e208d3829c0b0, type: 3}
     volume: 1
-    pitch: 0
+    pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Wedding Dance

@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour
 
     // Text UI Element that marks timer for sleep section
     public Text timerText;
-    // Button which can end the stacking phase early
-    public Button stackButton;
 
     // Used to track time left during gameplay
     private float timeLeft;
@@ -55,6 +53,9 @@ public class GameManager : MonoBehaviour
     /* Triggered by the button on the initial intro menu */
     public void Setup()
     {
+        // Just in case we ended a previous level on fast-forward
+        Time.timeScale = 1.0f;
+
         // Initialize gameplay variables
         timerText.text = "";
         timeLeft = stackTime;
@@ -63,6 +64,9 @@ public class GameManager : MonoBehaviour
         gameState = GameState.stacking;
         isCountdown = true;
         MinionSpawner.S.StartSpawning();
+
+        // Start the music for the stacking phase
+        AudioManager.S.Play("Stacking BGM");
     }
 
     private void Update()
@@ -111,8 +115,7 @@ public class GameManager : MonoBehaviour
         MinionSpawner.S.StopSpawning();
 
         // Remove the button for the end of stacking
-        if (stackButton.gameObject.activeInHierarchy)
-            stackButton.gameObject.SetActive(false);
+        ClockController.S.StartNightTime();
 
         // Check for failure in making the bed
         int validate = ClosetController.S.ValidateItems();
@@ -128,15 +131,17 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(transitionTime);
             FailLevel();
         }
+        else
+        {
+            // Give a moment of transition from day to night
+            yield return new WaitForSeconds(transitionTime);
 
-        // Give a moment of transition from day to night
-        yield return new WaitForSeconds(transitionTime);
-
-        // Move into the night time gameplay
-        PrincessController.princess.Activate();
-        timeLeft = sleepTime;
-        isCountdown = true;
-        gameState = GameState.sleeping;
+            // Move into the night time gameplay
+            PrincessController.princess.Activate();
+            timeLeft = sleepTime;
+            isCountdown = true;
+            gameState = GameState.sleeping;
+        }
     }
 
     public void FailLevel()
@@ -148,11 +153,14 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Failure()
     {
+        // Just in case we ended a previous level on fast-forward
+        Time.timeScale = 1.0f;
+
         // TODO: Play sound effect?
         gameState = GameState.gameOverLose;
         timerText.text = "You Lose";
 
-        // Give a moemnt of transition after you win
+        // Give a moment of transition after you win
         yield return new WaitForSeconds(transitionTime);
 
         // Move to game over screen?
@@ -161,6 +169,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Victory()
     {
+        // Just in case we ended a previous level on fast-forward
+        Time.timeScale = 1.0f;
+
         // TODO: Play sound effect? Fanfare?
         gameState = GameState.gameOverWin;
         timerText.text = "You Win!";
