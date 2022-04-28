@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
         gameState = GameState.stacking;
         isCountdown = true;
         MinionSpawner.S.StartSpawning();
+        if (SkyController.S != null)
+            SkyController.S.StartStacking(stackTime);
 
         // Start the music for the stacking phase
         AudioManager.S.Play("Stacking BGM");
@@ -102,6 +104,8 @@ public class GameManager : MonoBehaviour
         isCountdown = false;
         timeLeft = -1.0f;
         DisplayTimer();
+        if (SkyController.S != null)
+            SkyController.S.FinishStacking();
 
         StartCoroutine(BeginNighttime());
     }
@@ -141,6 +145,10 @@ public class GameManager : MonoBehaviour
             timeLeft = sleepTime;
             isCountdown = true;
             gameState = GameState.sleeping;
+
+            // Tell the sky to start moving again
+            if (SkyController.S != null)
+                SkyController.S.StartSleeping(sleepTime);
         }
     }
 
