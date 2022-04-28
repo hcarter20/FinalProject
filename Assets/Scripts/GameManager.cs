@@ -85,6 +85,10 @@ public class GameManager : MonoBehaviour
         {
             timeLeft -= Time.deltaTime;
             DisplayTimer();
+            if (gameState == GameState.stacking)
+                ClockController.S.UpdateClock(timeLeft, stackTime);
+            else
+                ClockController.S.UpdateClock(timeLeft, sleepTime);
 
             if (timeLeft <= 0.0f)
             {
@@ -110,6 +114,7 @@ public class GameManager : MonoBehaviour
 
         isCountdown = false;
         timeLeft = -1.0f;
+        ClockController.S.UpdateClock(0.0f, stackTime);
         DisplayTimer();
         if (SkyController.S != null)
             SkyController.S.FinishStacking();
