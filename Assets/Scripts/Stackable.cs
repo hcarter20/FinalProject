@@ -34,9 +34,9 @@ public class Stackable : MonoBehaviour
 
         while (meltTime < totalTime)
         {
-            meltTime += Time.deltaTime;
-            transform.localScale = Vector3.Lerp(initialScale, finalScale, meltTime / totalTime);
-            yield return null;
+            meltTime += Time.fixedDeltaTime;
+            transform.localScale = Vector3.LerpUnclamped(initialScale, finalScale, meltTime / totalTime);
+            yield return new WaitForFixedUpdate();
         }
 
         // Once it reaches such a small size, it's destroyed

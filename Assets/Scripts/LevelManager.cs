@@ -32,7 +32,7 @@ public class LevelManager : MonoBehaviour
     // All of the values which change for each level
     public List<float> stackTimes;
     public List<float> sleepTimes;
-    public List<Sprite> princessSprites;
+    public List<GameObject> princessPrefabs;
     public List<float> princessHeights;
     public List<float> princessMaxFalls;
     public List<GameObject> closetPrefabs;

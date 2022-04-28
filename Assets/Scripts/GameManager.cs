@@ -37,7 +37,10 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        S = this;
+        if (S == null)
+            S = this;
+        else
+            Destroy(this);
     }
 
     public void Start()
@@ -45,6 +48,10 @@ public class GameManager : MonoBehaviour
         // Load the values for this level
         stackTime = LevelManager.S.stackTimes[LevelManager.S.levelIndex];
         sleepTime = LevelManager.S.sleepTimes[LevelManager.S.levelIndex];
+
+        // Instatiate the princess for this level
+        GameObject princessPrefab = LevelManager.S.princessPrefabs[LevelManager.S.levelIndex];
+        Instantiate(princessPrefab, null);
 
         if (LevelManager.S.debug)
             Setup();

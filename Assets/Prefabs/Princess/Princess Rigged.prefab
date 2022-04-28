@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &831619245834109169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4866074788949051329}
+  - component: {fileID: 8220656832920187118}
+  m_Layer: 2
+  m_Name: Collision Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4866074788949051329
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831619245834109169}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.8174983, y: -0.6335217, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2316486468821102352}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &8220656832920187118
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831619245834109169}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.65}
+  m_Size: {x: 5, y: 1.2}
+  m_Direction: 1
 --- !u!1 &2316486468821102363
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,6 +60,7 @@ GameObject:
   - component: {fileID: 2316486468821102367}
   - component: {fileID: 2316486468821102366}
   - component: {fileID: 2316486468821102365}
+  - component: {fileID: 2153976433115431450}
   m_Layer: 0
   m_Name: bone_2
   m_TagString: Untagged
@@ -30,7 +78,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.8174983, y: 0.6335217, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4866074788949051329}
   m_Father: {fileID: 2316486469809538840}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -42,7 +91,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2316486468821102363}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -62,7 +111,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2316486468821102363}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -111,6 +160,18 @@ SpringJoint2D:
   m_Distance: 0.005
   m_DampingRatio: 1
   m_Frequency: 15
+--- !u!114 &2153976433115431450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2316486468821102363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 405c00901e0b13d429293d3507a294cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2316486469809538917
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +183,7 @@ GameObject:
   - component: {fileID: 2316486469809538840}
   - component: {fileID: 2316486469809538919}
   - component: {fileID: 2316486469809538918}
-  - component: {fileID: 1146882278989734796}
+  - component: {fileID: 8990933034824227187}
   m_Layer: 0
   m_Name: Princess Rigged
   m_TagString: Untagged
@@ -138,7 +199,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2316486469809538917}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2316486470277707932}
@@ -188,7 +249,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b60fa9ddca3779a43a47028a03d67c92, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -220,7 +281,7 @@ MonoBehaviour:
     m_Extent: {x: 2.7480893, y: 1.3868735, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
---- !u!114 &1146882278989734796
+--- !u!114 &8990933034824227187
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -229,11 +290,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2316486469809538917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b56d223bc6c4434a9f987a78ae9b299, type: 3}
+  m_Script: {fileID: 11500000, guid: a141b98c3793f6a4595211165f7fc3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHazard: 0
-  itemType: 0
+  maxRotateZ: 20
+  maxFallDist: 0
+  outlineCollider: {fileID: 8220656832920187118}
+  isSleeping: 0
+  noCollision: 1
 --- !u!1 &2316486469931154467
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,6 +310,7 @@ GameObject:
   - component: {fileID: 2316486469931154471}
   - component: {fileID: 2316486469931154470}
   - component: {fileID: 2316486469931154469}
+  - component: {fileID: 3682826528690609423}
   m_Layer: 0
   m_Name: bone_3
   m_TagString: Untagged
@@ -275,7 +340,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2316486469931154467}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -295,7 +360,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2316486469931154467}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -324,6 +389,18 @@ SpringJoint2D:
   m_Distance: 0.005
   m_DampingRatio: 1
   m_Frequency: 15
+--- !u!114 &3682826528690609423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2316486469931154467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 405c00901e0b13d429293d3507a294cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2316486470277707928
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +413,7 @@ GameObject:
   - component: {fileID: 2316486470277707929}
   - component: {fileID: 2316486470277707931}
   - component: {fileID: 2316486470277707930}
+  - component: {fileID: 8530502135700020662}
   m_Layer: 0
   m_Name: bone_1
   m_TagString: Untagged
@@ -365,7 +443,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2316486470277707928}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -385,7 +463,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2316486470277707928}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -414,3 +492,15 @@ SpringJoint2D:
   m_Distance: 0.005
   m_DampingRatio: 1
   m_Frequency: 15
+--- !u!114 &8530502135700020662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2316486470277707928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 405c00901e0b13d429293d3507a294cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

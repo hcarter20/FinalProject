@@ -64,6 +64,12 @@ MonoBehaviour:
   - 5
   - 5
   - 5
+  princessPrefabs:
+  - {fileID: 981705041141229027, guid: 3ea117385dee8cc4782457e0ad85e64a, type: 3}
+  - {fileID: 7016333870327899879, guid: eff045510b7c67d409b9721cd29bf37e, type: 3}
+  - {fileID: 6921337092768584770, guid: c01e36fef7a04d44eafba822f9bcf105, type: 3}
+  - {fileID: 8247581653371215319, guid: 2f1c505e970082945a9a8b52930536e3, type: 3}
+  - {fileID: 7861462200706979757, guid: fd0e622c303a1654bb6a45030ef34b2d, type: 3}
   princessSprites:
   - {fileID: 21300000, guid: 7dc05c1cb552e514d932eabb4891f5d8, type: 3}
   - {fileID: 21300000, guid: b60fa9ddca3779a43a47028a03d67c92, type: 3}
