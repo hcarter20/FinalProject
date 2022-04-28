@@ -8,8 +8,8 @@ public class ClockController : MonoBehaviour
     // Singleton Declaration
     public static ClockController S;
 
-    // The Clock UI image object
-    public GameObject clock;
+    // The Clock hand UI transform
+    public RectTransform hand;
 
     // The time control buttons
     public Button pauseButton;
@@ -31,6 +31,12 @@ public class ClockController : MonoBehaviour
     private void Start()
     {
         fastButtonImage = fastForwardButton.GetComponent<Image>();
+    }
+
+    public void UpdateClock(float timeLeft, float totalTime)
+    {
+        float angle = Mathf.LerpUnclamped(0.0f, 359.0f, timeLeft / totalTime);
+        hand.localEulerAngles = new Vector3(0.0f, 0.0f, angle);
     }
 
     /* The methods called by the time control buttons */
