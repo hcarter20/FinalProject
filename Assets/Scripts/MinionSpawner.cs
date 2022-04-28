@@ -8,10 +8,9 @@ public class MinionSpawner : MonoBehaviour
     public static MinionSpawner S;
 
     // Where is the minion trying to get to, to drop the item?
-    public Transform target, exit, flee;
-    // Toggle on flee option: minion flees straight up after startle
-    public float fleeHeight = 0.0f;
-    public bool fleeUp = false;
+    public Transform startLeft, startRight, target;
+    // Minion flees straight up after startle
+    public float fleeHeight = 6.5f;
 
     // The game object prefab for the minion
     private GameObject minionPrefab;
@@ -60,13 +59,17 @@ public class MinionSpawner : MonoBehaviour
             // TODO: For now the same every time, add in randomness
             yield return new WaitForSeconds(minionTime);
 
+            // Randomly decide whether moves left to right, or right to left
+            bool fromLeft = Random.Range(0, 2) == 0;
+            Transform start = fromLeft ? startLeft : startRight;
+            Transform exit = fromLeft ? startRight : startLeft;
+            
             // Create a new minion
-            minion = Instantiate(minionPrefab, transform);
+            minion = Instantiate(minionPrefab, start);
             MinionController cont = minion.GetComponent<MinionController>();
+            cont.fleeHeight = fleeHeight;
             cont.targetPosition = new Vector2(target.position.x, target.position.y);
             cont.exitPosition = new Vector2(exit.position.x, exit.position.y);
-            cont.fleePosition = new Vector2(flee.position.x, flee.position.y);
-            cont.fleeHeight = fleeUp ? fleeHeight : 0.0f;
 
             // Check in with the minion, to see when it's finished
             while (minion != null)

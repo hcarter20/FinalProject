@@ -5,8 +5,9 @@ using UnityEngine;
 public class MinionController : MonoBehaviour
 {
     // Where is the minion trying to get to, to drop the item?
-    public Vector2 targetPosition, exitPosition, fleePosition;
+    public Vector2 targetPosition, exitPosition;
     public float fleeHeight;
+    private Vector2 fleePosition;
     // The movement speed of the minion, when moving normally or after startle (fleeing)
     public float defaultSpeed = 1.0f;
     public float fleeSpeed = 2.0f;
@@ -26,12 +27,12 @@ public class MinionController : MonoBehaviour
 
     // The animator and sprite renderer components on this game object
     private Animator animator;
-    private SpriteRenderer sprite;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        sprite = GetComponent<SpriteRenderer>();
+        if (exitPosition.x < targetPosition.x)
+            transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
 
         int index = 0;
 
@@ -100,10 +101,10 @@ public class MinionController : MonoBehaviour
         moveState = MoveState.startle;
         yield return new WaitForSeconds(0.5f);
 
-        if (fleeHeight != 0.0f)
-            fleePosition = new Vector2(transform.position.x, fleeHeight);
+        fleePosition = new Vector2(transform.position.x, fleeHeight);
         moveState = MoveState.flee;
     }
+
     private IEnumerator DropObjectThenFlee()
     {
         moveState = MoveState.startle;
@@ -114,18 +115,12 @@ public class MinionController : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        if (fleeHeight != 0.0f)
-            fleePosition = new Vector2(transform.position.x, fleeHeight);
+        fleePosition = new Vector2(transform.position.x, fleeHeight);
         moveState = MoveState.flee;
     }
 
-
     private void MovePosition(Vector2 goal, float speed)
     {
-        // Flip the sprite depending on direction of motion
-        // sprite.flipX = (transform.position.x <= goal.x);
-        // transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
-
         // Move the minion towards the goal position
         Vector2 currPosition = new Vector2(transform.position.x, transform.position.y);
         Vector2 newPosition = Vector2.MoveTowards(currPosition, goal, speed * Time.fixedDeltaTime);
