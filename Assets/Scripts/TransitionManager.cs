@@ -70,7 +70,7 @@ public class TransitionManager : MonoBehaviour
             flipAnimator.Play("FlipPage");
         else
             flipAnimator.Play("FlipPageBack");
-
+        AudioManager.S.Play("FlipPage");
         yield return new WaitForSecondsRealtime(pageFlipTime);
 
         // Trigger the button fade in animation

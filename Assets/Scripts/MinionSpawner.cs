@@ -47,7 +47,10 @@ public class MinionSpawner : MonoBehaviour
         if (minionCoroutine != null)
             StopCoroutine(minionCoroutine);
         if (minion != null)
+        {
+            AudioManager.S.Pause("WingFlapping"); 
             Destroy(minion);
+        }
     }
 
     private IEnumerator MinionTimer()

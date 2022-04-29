@@ -100,6 +100,7 @@ public class InGameMenu : MonoBehaviour
 
         // Animate the page flipping
         flipAnimator.SetBool("isFlipped", forward);
+        AudioManager.S.Play("FlipPage");
         yield return new WaitForSecondsRealtime(pageFlipTime);
 
         // Trigger the button fade in animation

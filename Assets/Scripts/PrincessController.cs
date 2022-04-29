@@ -126,6 +126,7 @@ public class PrincessController : MonoBehaviour
             return;
 
         isSleeping = false;
+        AudioManager.S.Play("Yawn");
         GameManager.S.FailLevel();
     }
 
