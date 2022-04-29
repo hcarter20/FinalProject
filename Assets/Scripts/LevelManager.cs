@@ -80,6 +80,9 @@ public class LevelManager : MonoBehaviour
     public void ReturnToTitle()
     {
         LoadScene(TitleScene);
+
+        // Start playing the title music
+        AudioManager.S.PlayTitleMusic();
     }
 
     /* Triggered when player passes gameplay, move to level select */
@@ -89,14 +92,9 @@ public class LevelManager : MonoBehaviour
 
         if (levelIndex >= LevelCount)
         {
-            if (debug)
-            {
-                // Reset the level index, to avoid bugs
-                levelIndex = 0;
-                ReturnToTitle();
-            }
-            else
-                LoadScene(VictoryScene);
+            // Reset the level index, to avoid bugs
+            levelIndex = 0;
+            LoadScene(VictoryScene);
         }
         else
         {
@@ -107,10 +105,7 @@ public class LevelManager : MonoBehaviour
     /* Triggered when player fails gameplay, moves to game over */
     public void FailLevel()
     {
-        if (debug)
-            ReturnToTitle();
-        else
-            LoadScene(LossScene);
+        LoadScene(LossScene);
     }
 
     /* Load the next level of gameplay from the level select scene */
