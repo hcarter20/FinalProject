@@ -46,7 +46,7 @@ MonoBehaviour:
   debug: 1
   TitleScene: TitleScreen
   IntroScene: Intro
-  SelectScene: LevelSelect
+  SelectScene: TransitionScene
   GameScene: Bedroom
   VictoryScene: Victory
   LossScene: GameOver
@@ -112,3 +112,15 @@ MonoBehaviour:
   - 0.1
   - 0.1
   - 0.2
+  chapterName:
+  - The Princess and the Pea
+  - The Princess and the Watermelon
+  - The Princess and the Ice
+  - The Princess and the Flan
+  - The Princess and the Nightmare
+  chapterIcon:
+  - {fileID: 21300000, guid: 3b6512295c58bcb4e865c14f1ecfb5e1, type: 3}
+  - {fileID: 21300000, guid: 741c7ffe84e15164194e6584df2548c0, type: 3}
+  - {fileID: 21300000, guid: 2913933100aeb994b810443d3aa9f1f8, type: 3}
+  - {fileID: 21300000, guid: 1686518fcec8b3f418f4e1d68f38592f, type: 3}
+  - {fileID: 21300000, guid: bf9d73e4fba56b74481341c6492d78d4, type: 3}

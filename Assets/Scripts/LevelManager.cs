@@ -18,7 +18,7 @@ public class LevelManager : MonoBehaviour
     // List of scene names: so we can modify through the Unity editor
     public string TitleScene = "TitleScreen";
     public string IntroScene = "Intro";
-    public string SelectScene = "LevelSelect";
+    public string SelectScene = "TransitionScene";
     public string GameScene = "Bedroom";
     public string VictoryScene = "Victory";
     public string LossScene = "GameOver";
@@ -40,6 +40,9 @@ public class LevelManager : MonoBehaviour
     public List<float> minionTimes;
     public List<float> slideSpeeds;
     public List<float> speedIncrs;
+    // egchan adding for transition? 
+    public List<string> chapterName;
+    public List<Sprite> chapterIcon;
 
     private void Awake()
     {
@@ -66,7 +69,7 @@ public class LevelManager : MonoBehaviour
     public void StartFromTitle()
     {
         if (debug)
-            NextLevel();
+            LoadScene(SelectScene);
         else
             LoadScene(IntroScene);
     }
@@ -92,14 +95,11 @@ public class LevelManager : MonoBehaviour
             }
             else
                 LoadScene(VictoryScene);
-
-            return;
         }
-
-        if (debug)
-            NextLevel();
         else
+        {
             LoadScene(SelectScene);
+        }
     }
 
     /* Triggered when player fails gameplay, moves to game over */
