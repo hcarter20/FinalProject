@@ -61,6 +61,13 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: Sleeping BGM
+    isMusic: 0
+    clip: {fileID: 8300000, guid: 6791a62d7f3e09a4caee4d2be6c8fa0e, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   - name: Wedding Dance
     isMusic: 1
     clip: {fileID: 8300000, guid: d7ed9646f210e494db73655941e2be68, type: 3}
@@ -106,14 +113,35 @@ MonoBehaviour:
   - name: Squeak2
     isMusic: 0
     clip: {fileID: 8300000, guid: 0bcdcd4fcecca5e4fb60b5bdd0b767b5, type: 3}
-    volume: 1
-    pitch: 1
+    volume: 0.3
+    pitch: 0.5
     loop: 0
     source: {fileID: 0}
   - name: Squeak3
     isMusic: 0
     clip: {fileID: 8300000, guid: 8862c348de69033468ecab6860df805c, type: 3}
     volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: FlipPage
+    isMusic: 0
+    clip: {fileID: 8300000, guid: 733d5a6014712f645b304b79f94df3ec, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WingFlapping
+    isMusic: 0
+    clip: {fileID: 8300000, guid: a6c3b3e8cf8cd8b41b744796446dbb8f, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Yawn
+    isMusic: 0
+    clip: {fileID: 8300000, guid: 39ebdc07f9ea45747be5cc627661c8ed, type: 3}
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}

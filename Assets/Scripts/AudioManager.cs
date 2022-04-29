@@ -63,6 +63,15 @@ public class AudioManager : MonoBehaviour
         s.source.Stop();
     }
 
+    public void StopAllSounds()
+    {
+        foreach (Sound s in sounds)
+        {
+            if (s.source.isPlaying)
+                s.source.Stop();
+        }
+    }
+
     /* Specialized functions called by other scripts */
     public void PlayTitleMusic()
     {

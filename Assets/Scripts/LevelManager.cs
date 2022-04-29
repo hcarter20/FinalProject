@@ -68,7 +68,7 @@ public class LevelManager : MonoBehaviour
     /* Called by the Start button on the Title Menu */
     public void StartFromTitle()
     {
-        AudioManager.S.StopTitleMusic();
+        AudioManager.S.StopAllSounds();
 
         if (debug)
             LoadScene(SelectScene);
@@ -79,15 +79,18 @@ public class LevelManager : MonoBehaviour
     /* Triggered when we want to return to the Title Menu */
     public void ReturnToTitle()
     {
-        LoadScene(TitleScene);
-
         // Start playing the title music
+        AudioManager.S.StopAllSounds();
         AudioManager.S.PlayTitleMusic();
+
+        LoadScene(TitleScene);
     }
 
     /* Triggered when player passes gameplay, move to level select */
     public void PassLevel()
     {
+        AudioManager.S.StopAllSounds();
+
         levelIndex++;
 
         if (levelIndex >= LevelCount)
@@ -105,12 +108,14 @@ public class LevelManager : MonoBehaviour
     /* Triggered when player fails gameplay, moves to game over */
     public void FailLevel()
     {
+        AudioManager.S.StopAllSounds();
         LoadScene(LossScene);
     }
 
     /* Load the next level of gameplay from the level select scene */
     public void NextLevel()
     {
+        AudioManager.S.StopAllSounds();
         LoadScene(GameScene);
     }
 

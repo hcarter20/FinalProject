@@ -42,6 +42,8 @@ public class MinionController : MonoBehaviour
 
         hazardPrefab = hazardPrefabs[index];
         hazardProp = Instantiate(hazardPropPrefabs[index], transform);
+
+        AudioManager.S.Play("WingFlapping");
     }
 
     private void FixedUpdate()
@@ -56,14 +58,20 @@ public class MinionController : MonoBehaviour
         else if (moveState == MoveState.leave)
         {
             if (Vector2.Distance(AsVector2(transform.position), exitPosition) < 0.1f)
+            {
+                AudioManager.S.Pause("WingFlapping");
                 Destroy(gameObject);
+            }
             else
                 MovePosition(exitPosition, defaultSpeed);
         }
         else if (moveState == MoveState.flee)
         {
             if (Vector2.Distance(AsVector2(transform.position), fleePosition) < 0.1f)
+            {
+                AudioManager.S.Pause("WingFlapping");
                 Destroy(gameObject);
+            }
             else
                 MovePosition(fleePosition, fleeSpeed);
         }
@@ -99,15 +107,20 @@ public class MinionController : MonoBehaviour
     private IEnumerator Flee()
     {
         moveState = MoveState.startle;
+        AudioManager.S.Pause("WingFlapping");
+        AudioManager.S.Play("Squeak2");
         yield return new WaitForSeconds(0.5f);
 
         fleePosition = new Vector2(transform.position.x, fleeHeight);
         moveState = MoveState.flee;
+        AudioManager.S.Pause("WingFlapping");
     }
 
     private IEnumerator DropObjectThenFlee()
     {
         moveState = MoveState.startle;
+        AudioManager.S.Pause("WingFlapping");
+        AudioManager.S.Play("Squeak2");
 
         Transform hazardTransform = hazardProp.transform;
         Destroy(hazardProp);
@@ -117,6 +130,7 @@ public class MinionController : MonoBehaviour
 
         fleePosition = new Vector2(transform.position.x, fleeHeight);
         moveState = MoveState.flee;
+        AudioManager.S.Pause("WingFlapping");
     }
 
     private void MovePosition(Vector2 goal, float speed)
