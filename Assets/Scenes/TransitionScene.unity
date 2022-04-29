@@ -606,7 +606,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7181dc4d3711a40aa6174fd1211547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 134016299}
 --- !u!1 &141605802
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,7 +1158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7181dc4d3711a40aa6174fd1211547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 233161535}
 --- !u!1 &290018629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,7 +1484,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7181dc4d3711a40aa6174fd1211547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 383716382}
 --- !u!1 &432275571
 GameObject:
   m_ObjectHideFlags: 0
@@ -1869,7 +1866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7181dc4d3711a40aa6174fd1211547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 686294955}
 --- !u!1 &733283904
 GameObject:
   m_ObjectHideFlags: 0
@@ -2767,7 +2763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7594754578225619618, guid: a63ace768d941504d80b8d47ca3fd33c, type: 3}
       propertyPath: levelIndex
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a63ace768d941504d80b8d47ca3fd33c, type: 3}
@@ -3653,7 +3649,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7181dc4d3711a40aa6174fd1211547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1837645936}
 --- !u!1 &1937559437
 GameObject:
   m_ObjectHideFlags: 0
