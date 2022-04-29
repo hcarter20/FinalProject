@@ -40,6 +40,9 @@ public class LevelManager : MonoBehaviour
     public List<float> minionTimes;
     public List<float> slideSpeeds;
     public List<float> speedIncrs;
+    // egchan adding for transition? 
+    public List<string> chapterName;
+    public List<Sprite> chapterIcon;
 
     private void Awake()
     {
