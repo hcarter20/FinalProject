@@ -97,10 +97,12 @@ public class LevelManager : MonoBehaviour
         {
             // Reset the level index, to avoid bugs
             levelIndex = 0;
+            AudioManager.S.Play("HappyEnding");
             LoadScene(VictoryScene);
         }
         else
         {
+            AudioManager.S.PlayTitleMusic();
             LoadScene(SelectScene);
         }
     }
@@ -109,6 +111,7 @@ public class LevelManager : MonoBehaviour
     public void FailLevel()
     {
         AudioManager.S.StopAllSounds();
+        AudioManager.S.Play("BadEnding");
         LoadScene(LossScene);
     }
 
