@@ -61,6 +61,13 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: Sleeping BGM
+    isMusic: 0
+    clip: {fileID: 8300000, guid: 6791a62d7f3e09a4caee4d2be6c8fa0e, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   - name: Wedding Dance
     isMusic: 1
     clip: {fileID: 8300000, guid: d7ed9646f210e494db73655941e2be68, type: 3}

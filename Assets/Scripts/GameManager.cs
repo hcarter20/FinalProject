@@ -112,6 +112,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        AudioManager.S.Pause("Stacking BGM");
+
         isCountdown = false;
         timeLeft = -1.0f;
         ClockController.S.UpdateClock(0.0f, stackTime);
@@ -149,6 +151,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            // Start the music for the stacking phase
+            AudioManager.S.Play("Sleeping BGM");
+
             // Give a moment of transition from day to night
             yield return new WaitForSeconds(transitionTime);
 
@@ -167,7 +172,7 @@ public class GameManager : MonoBehaviour
     public void FailLevel()
     {
         // Freeze the countdown timer, instantly fail level
-        isCountdown = false;
+        isCountdown = false; 
         StartCoroutine(Failure());
     }
 
