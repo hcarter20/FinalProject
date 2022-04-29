@@ -71,6 +71,11 @@ public class AudioManager : MonoBehaviour
         Play("Wedding Dance");
     }
 
+    public void StopTitleMusic()
+    {
+        Pause("Wedding Dance");
+    }
+
     /* Functions called by the sliders in the volume settings */
     public void AdjustVolumeMaster(Slider slider)
     {

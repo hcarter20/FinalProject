@@ -68,6 +68,8 @@ public class LevelManager : MonoBehaviour
     /* Called by the Start button on the Title Menu */
     public void StartFromTitle()
     {
+        AudioManager.S.StopTitleMusic();
+
         if (debug)
             LoadScene(SelectScene);
         else

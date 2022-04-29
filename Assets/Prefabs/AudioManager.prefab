@@ -64,7 +64,7 @@ MonoBehaviour:
   - name: Wedding Dance
     isMusic: 1
     clip: {fileID: 8300000, guid: d7ed9646f210e494db73655941e2be68, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 1
     source: {fileID: 0}
