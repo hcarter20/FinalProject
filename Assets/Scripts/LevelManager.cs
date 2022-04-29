@@ -68,12 +68,7 @@ public class LevelManager : MonoBehaviour
     /* Called by the Start button on the Title Menu */
     public void StartFromTitle()
     {
-        AudioManager.S.StopAllSounds();
-
-        if (debug)
-            LoadScene(SelectScene);
-        else
-            LoadScene(IntroScene);
+        LoadScene(SelectScene);
     }
 
     /* Triggered when we want to return to the Title Menu */

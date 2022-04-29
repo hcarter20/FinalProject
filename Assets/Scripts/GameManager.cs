@@ -126,6 +126,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator BeginNighttime()
     {
+        AudioManager.S.StopAllSounds();
+
         // TODO: Play sound effect? Some signal of the transition?
         gameState = GameState.sunset;
 
